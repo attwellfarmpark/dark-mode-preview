@@ -3,11 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Attwell Farm Park — Dark Mode Brand Guide</title>
+<title>Attwell Farm Park — Component Reference Sheet</title>
 <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Rum+Raisin&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 <style>
+  /* ═══════════════════════════════════════════════
+     DESIGN TOKENS
+     ═══════════════════════════════════════════════ */
   :root {
-    /* Light mode tokens */
     --bg: #ffffff;
     --bg-surface: #ffffff;
     --bg-surface-elevated: #f8f9fa;
@@ -17,14 +20,57 @@
     --border-subtle: oklch(90% 0.01 162);
 
     --primary: oklch(65.63% 0.0821 162.32);
+    --primary-50: oklch(96% 0.01 164.87);
+    --primary-100: oklch(91.78% 0.0185 166.35);
+    --primary-200: oklch(82.89% 0.0416 164.52);
+    --primary-300: oklch(74.41% 0.0625 163.2);
+    --primary-400: oklch(65.63% 0.0821 162.32);
+    --primary-500: oklch(57.71% 0.0724 161.64);
+    --primary-600: oklch(49.53% 0.0615 161.78);
+    --primary-700: oklch(40.05% 0.0477 162.18);
+    --primary-800: oklch(31.09% 0.0335 164.13);
+    --primary-900: oklch(20.52% 0.0188 164.72);
+    --primary-950: oklch(15.22% 0.0104 159.24);
+
     --secondary: oklch(82.68% 0.1195 90.31);
+    --secondary-50: oklch(96.97% 0.0217 92.5);
+    --secondary-100: oklch(93.86% 0.0427 89.36);
+    --secondary-200: oklch(88.06% 0.0845 90.3);
+    --secondary-300: oklch(82.68% 0.1195 90.31);
+    --secondary-700: oklch(49.96% 0.0937 87.13);
+
     --tertiary: oklch(72.12% 0.0579 273.63);
-    --blue: oklch(64.19% 0.1369 249.8);
+    --tertiary-50: oklch(97.2% 0.0062 255.47);
+    --tertiary-100: oklch(94.81% 0.0103 261.79);
+    --tertiary-400: oklch(76.53% 0.0492 269.48);
+    --tertiary-700: oklch(54.13% 0.0798 279.07);
+
+    --blue: oklch(90.68% 0.0337 246.81);
+    --blue-50: oklch(97.6% 0.0093 242.84);
+    --blue-100: oklch(94.98% 0.0179 245.39);
+    --blue-500: oklch(64.19% 0.1369 249.8);
+    --blue-700: oklch(44.54% 0.1096 250.89);
+
+    --red-100: oklch(93.6% 0.032 17.72);
+    --red-500: oklch(63.7% 0.219 29.23);
+    --red-700: oklch(50.5% 0.177 29.23);
+
+    --christmas-500: oklch(0.519 0.17 27.77);
+    --gold-star: #efbf04;
+
+    --dark: oklch(17.98% 0.0269 90.65);
+    --light: #ffffff;
 
     --btn-text: #ffffff;
   }
 
+  /* ───────────────────────────────────────────
+     DARK MODE — same tokens, deeper shades.
+     Every component using bg-primary gets the
+     same shifted value. No per-component overrides.
+     ─────────────────────────────────────────── */
   [data-theme="dark"] {
+    /* Surfaces */
     --bg: oklch(15.22% 0.0104 159.24);
     --bg-surface: oklch(18% 0.012 162);
     --bg-surface-elevated: oklch(22% 0.015 162);
@@ -33,16 +79,65 @@
     --text-secondary: oklch(75% 0.01 90);
     --border-subtle: oklch(30% 0.02 162);
 
-    --primary: oklch(74.41% 0.0625 163.2);
-    --secondary: oklch(88.06% 0.0845 90.3);
-    --tertiary: oklch(76.53% 0.0492 269.48);
-    --blue: oklch(72.84% 0.1018 247.3);
+    /* Primary (green) — deepens from 400 → between 400-500
+       ~55% L: readable as text on dark surfaces AND works as accent bg */
+    --primary: oklch(52% 0.065 161.78);
+    --primary-50: oklch(20.52% 0.0188 164.72);
+    --primary-100: oklch(25% 0.025 163);
+    --primary-200: oklch(31.09% 0.0335 164.13);
+    --primary-300: oklch(40.05% 0.0477 162.18);
+    --primary-400: oklch(49.53% 0.0615 161.78);
+    --primary-500: oklch(57.71% 0.0724 161.64);
+    --primary-600: oklch(31.09% 0.0335 164.13);
+    --primary-700: oklch(65.63% 0.0821 162.32);
+    --primary-800: oklch(74.41% 0.0625 163.2);
+    --primary-900: oklch(82.89% 0.0416 164.52);
+    --primary-950: oklch(15.22% 0.0104 159.24);
 
-    --btn-text: oklch(15% 0.01 162);
+    /* Secondary (yellow) — deepens from 300 → 500
+       ~50% L: dark enough for light text contrast */
+    --secondary: oklch(52% 0.10 86.5);
+    --secondary-50: oklch(20% 0.03 87.84);
+    --secondary-100: oklch(24% 0.04 88);
+    --secondary-200: oklch(38% 0.075 87.5);
+    --secondary-300: oklch(53% 0.11 86.5);
+    --secondary-700: oklch(78.2% 0.1394 88.06);
+
+    /* Tertiary (purple) — deepens from 500 → 600
+       ~58% L: readable as text, moody as bg */
+    --tertiary: oklch(52% 0.075 279);
+    --tertiary-50: oklch(27% 0.03 278);
+    --tertiary-100: oklch(35% 0.045 277);
+    --tertiary-400: oklch(58% 0.08 279);
+    --tertiary-700: oklch(72.12% 0.0579 273.63);
+
+    /* Blue — deepens from sky-blue (90%) → mid navy (38%) */
+    --blue: oklch(38% 0.08 249);
+    --blue-50: oklch(22% 0.04 248);
+    --blue-100: oklch(28% 0.06 249);
+    --blue-500: oklch(50% 0.11 250);
+    --blue-700: oklch(72.84% 0.1018 247.3);
+
+    /* Red — deepens */
+    --red-100: oklch(28% 0.06 20);
+    --red-500: oklch(55% 0.18 29);
+    --red-700: oklch(70% 0.15 29.23);
+
+    /* Semantic text colours
+       --dark and --light are used for TEXT on brand backgrounds.
+       bg-primary text-light → deep green bg + light text (still needs contrast)
+       bg-secondary text-dark → deep amber bg + light text (dark inverts to light)
+    */
+    --dark: oklch(93% 0.01 90);
+    --light: oklch(93% 0.01 90);
+
+    --btn-text: oklch(93% 0.01 90);
   }
 
+  /* ═══════════════════════════════════════════════
+     BASE STYLES
+     ═══════════════════════════════════════════════ */
   * { margin: 0; padding: 0; box-sizing: border-box; }
-
   body {
     font-family: 'Open Sans', sans-serif;
     background: var(--bg);
@@ -50,560 +145,2045 @@
     transition: background 0.3s, color 0.3s;
     line-height: 1.6;
   }
-
   .font-body { font-family: 'Patrick Hand', cursive; }
   .font-heading { font-family: 'Rum Raisin', sans-serif; }
+  a { color: inherit; text-decoration: none; }
 
-  /* Toggle */
-  .toggle-bar {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1rem 2rem;
-    background: var(--bg-surface-elevated);
+  /* ═══════════════════════════════════════════════
+     TOOLBAR
+     ═══════════════════════════════════════════════ */
+  .toolbar {
+    position: sticky; top: 0; z-index: 200;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0.6rem 2rem;
+    background: oklch(22% 0.015 162); color: oklch(93% 0.01 90);
+    border-bottom: 1px solid oklch(30% 0.02 162);
+    gap: 1rem;
+  }
+  .toolbar h1 { font-family: 'Rum Raisin', sans-serif; font-size: 1.15rem; letter-spacing: 0.05em; white-space: nowrap; }
+  .toolbar__controls { display: flex; gap: 0.5rem; align-items: center; }
+  .toolbar__btn {
+    padding: 0.4rem 1.25rem; border-radius: 999px; font-family: 'Rum Raisin', sans-serif;
+    font-size: 0.85rem; cursor: pointer; border: 2px solid oklch(74.41% 0.0625 163.2);
+    background: oklch(74.41% 0.0625 163.2); color: oklch(15% 0.01 162);
+    letter-spacing: 0.05em; transition: all 0.3s;
+  }
+  .toolbar__btn:hover { opacity: 0.85; }
+  .toolbar__btn--outline {
+    background: transparent; color: oklch(74.41% 0.0625 163.2);
+  }
+
+  /* ═══════════════════════════════════════════════
+     SECTION CHROME (reference layout)
+     ═══════════════════════════════════════════════ */
+  .ref-section {
     border-bottom: 1px solid var(--border-subtle);
+    transition: border-color 0.3s;
+  }
+  .ref-section__header {
+    display: flex; align-items: center; gap: 0.75rem;
+    padding: 1.25rem 2rem 0.5rem;
+  }
+  .ref-section__header h2 {
+    font-family: 'Rum Raisin', sans-serif; font-size: 1.4rem; letter-spacing: 0.03em; white-space: nowrap;
+  }
+  .ref-section__header::after {
+    content: ''; flex: 1; height: 1px; background: var(--border-subtle); transition: background 0.3s;
+  }
+  .ref-section__meta {
+    padding: 0 2rem 0.25rem; font-size: 0.75rem; color: var(--text-secondary);
+    font-family: 'SF Mono', 'Fira Code', monospace; transition: color 0.3s;
+  }
+  .ref-section__body { padding: 0.75rem 2rem 2rem; }
+
+  /* Badges */
+  .badge-adapts {
+    display: inline-block; padding: 0.1rem 0.55rem; border-radius: 999px;
+    font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em;
+    background: var(--secondary); color: var(--dark); transition: all 0.3s;
+  }
+  .badge-adapts {
+    display: inline-block; padding: 0.1rem 0.55rem; border-radius: 999px;
+    font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em;
+    background: var(--primary); color: var(--btn-text); transition: all 0.3s;
+  }
+  .badge-photo {
+    display: inline-block; padding: 0.1rem 0.55rem; border-radius: 999px;
+    font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em;
+    background: oklch(40% 0.02 90); color: white;
+  }
+
+  /* Token table */
+  .token-table { font-size: 0.7rem; font-family: 'SF Mono', 'Fira Code', monospace; }
+  .token-table td { padding: 0.1rem 0.5rem 0.1rem 0; vertical-align: top; }
+  .token-table .token-name { color: var(--primary); font-weight: 600; transition: color 0.3s; }
+  .token-table .token-class { color: var(--text-secondary); transition: color 0.3s; }
+  .token-table .token-swatch {
+    width: 14px; height: 14px; border-radius: 3px; display: inline-block;
+    vertical-align: middle; border: 1px solid rgba(128,128,128,0.2);
+  }
+
+  /* ═══════════════════════════════════════════════
+     COMPONENT MOCKUPS
+     ═══════════════════════════════════════════════ */
+
+  /* — Announcement Bar — */
+  .c-announcement {
+    background: var(--secondary); color: var(--dark);
+    padding: 0.5rem 1.5rem; position: relative; overflow: hidden; letter-spacing: 0.05em;
+  }
+  .c-announcement__inner {
+    display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+    max-width: 1200px; margin: 0 auto;
+  }
+  .c-announcement__text { font-family: 'Rum Raisin', sans-serif; font-size: 1rem; text-align: center; }
+  .c-announcement__close {
+    position: absolute; right: 1rem; top: 50%; transform: translateY(-50%);
+    background: none; border: none; color: var(--dark);
+    font-size: 1rem; cursor: pointer; opacity: 0.5; min-width: 44px; min-height: 44px;
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  /* — Information Bar — */
+  .c-info-bar {
+    background: var(--primary); color: var(--light); padding: 0.35rem 1.5rem;
+  }
+  .c-info-bar__inner {
+    display: flex; align-items: center; justify-content: space-between;
+    max-width: 1200px; margin: 0 auto; font-family: 'Patrick Hand', cursive; font-size: 0.95rem;
+  }
+  .c-info-bar__group { display: flex; align-items: center; gap: 0.35rem; }
+
+  /* — Navigation Bar — */
+  .c-nav {
+    padding: 0.65rem 1.5rem; border-top: 3px solid var(--primary);
+    background: var(--bg-surface-elevated); transition: all 0.3s;
+  }
+  .c-nav__inner {
+    display: flex; align-items: center; justify-content: space-between;
+    max-width: 1200px; margin: 0 auto;
+  }
+  .c-nav__logo {
+    width: 60px; height: 60px; border-radius: 50%; background: var(--primary);
+    display: flex; align-items: center; justify-content: center; color: white;
+    font-family: 'Rum Raisin', sans-serif; font-size: 0.5rem; text-align: center; line-height: 1.1;
+  }
+  .c-nav__actions { display: flex; align-items: center; gap: 0.6rem; }
+  .c-nav__btn {
+    padding: 0.4rem 1rem; border-radius: 999px; font-family: 'Rum Raisin', sans-serif;
+    font-size: 0.85rem; cursor: pointer; border: none; letter-spacing: 0.05em;
+    background: var(--primary); color: var(--btn-text); transition: all 0.3s;
+  }
+  .c-nav__menu {
+    width: 40px; height: 40px; border-radius: 50%; background: var(--bg-surface-highest);
+    border: 1px solid var(--border-subtle); display: flex; align-items: center;
+    justify-content: center; cursor: pointer; font-size: 1.1rem; color: var(--text-primary);
+    transition: all 0.3s;
+  }
+
+  /* — Canvas Menu — */
+  .c-canvas {
+    background: var(--primary); color: white; padding: 2rem;
+    border-radius: 12px; position: relative; overflow: hidden;
+  }
+  .c-canvas__inner {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;
+    max-width: 1200px; margin: 0 auto; position: relative; z-index: 1;
+  }
+  .c-canvas__nav-items { display: flex; flex-direction: column; gap: 0.5rem; }
+  .c-canvas__nav-item {
+    font-family: 'Rum Raisin', sans-serif; font-size: 1.3rem; opacity: 0.9;
+    padding: 0.5rem 1rem; border-radius: 8px; cursor: pointer;
+  }
+  .c-canvas__nav-item:hover { background: rgba(255,255,255,0.1); }
+  .c-canvas__contact { display: flex; flex-direction: column; gap: 0.75rem; }
+  .c-canvas__contact-item {
+    display: flex; align-items: center; gap: 0.5rem;
+    font-family: 'Patrick Hand', cursive; font-size: 1rem;
+    padding: 0.75rem; border-radius: 8px; background: rgba(0,0,0,0.2);
+  }
+  .c-canvas__bg {
+    position: absolute; inset: 0; opacity: 0.05; font-size: 3rem;
+    display: flex; flex-wrap: wrap; gap: 1rem; padding: 1rem;
+    align-content: flex-start; overflow: hidden; pointer-events: none;
+  }
+
+  /* — Page Header — */
+  .c-page-header {
+    background: var(--blue);
+    border-radius: 0 0 12px 12px;
+    padding: 5rem 2rem 2rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
     transition: background 0.3s;
   }
-  .toggle-bar h1 {
-    font-family: 'Rum Raisin', sans-serif;
-    font-size: 1.5rem;
-    letter-spacing: 0.05em;
-  }
-  .toggle-btn {
-    padding: 0.5rem 1.5rem;
-    border: 2px solid var(--primary);
-    border-radius: 999px;
-    background: var(--primary);
-    color: var(--btn-text);
-    font-family: 'Rum Raisin', sans-serif;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: all 0.3s;
-    letter-spacing: 0.05em;
-  }
-  .toggle-btn:hover { opacity: 0.85; }
-
-  .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 2rem;
-  }
-
-  section {
-    margin-bottom: 3rem;
-  }
-
-  h2 {
-    font-family: 'Rum Raisin', sans-serif;
-    font-size: 1.75rem;
-    margin-bottom: 1rem;
-    letter-spacing: 0.03em;
-  }
-
-  h3 {
-    font-family: 'Rum Raisin', sans-serif;
-    font-size: 1.25rem;
-    margin-bottom: 0.75rem;
-    color: var(--text-secondary);
-  }
-
-  p { margin-bottom: 1rem; }
-
-  /* Colour swatches */
-  .swatch-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-    gap: 1rem;
-    margin-bottom: 1.5rem;
-  }
-  .swatch {
-    border-radius: 12px;
-    overflow: hidden;
-    border: 1px solid var(--border-subtle);
-    transition: border 0.3s;
-  }
-  .swatch-color {
-    height: 80px;
+  .c-page-header--image {
+    background-size: cover;
+    background-position: center;
+    min-height: 280px;
     display: flex;
     align-items: flex-end;
-    padding: 0.5rem;
   }
-  .swatch-label {
-    padding: 0.5rem 0.75rem;
-    background: var(--bg-surface);
-    font-size: 0.8rem;
+  .c-page-header__overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.85), rgba(0,0,0,0.5), transparent);
+  }
+  [data-theme="dark"] .c-page-header__overlay {
+    background: linear-gradient(to top, rgba(0,0,0,0.92), rgba(0,0,0,0.7), rgba(0,0,0,0.3));
+  }
+  .c-page-header__content {
+    position: relative; z-index: 1;
+    max-width: 1200px; margin: 0 auto;
+  }
+  .c-page-header h1 {
+    font-family: 'Rum Raisin', sans-serif;
+    font-size: 2rem; color: white;
+  }
+  .c-page-header p {
+    font-family: 'Patrick Hand', cursive;
+    font-size: 1.1rem; color: rgba(255,255,255,0.85);
+    margin-top: 0.25rem;
+  }
+  .c-page-header__clouds {
+    position: absolute; inset: 0;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 60'%3E%3Cellipse cx='40' cy='45' rx='35' ry='12' fill='white' opacity='0.15'/%3E%3Cellipse cx='140' cy='35' rx='45' ry='14' fill='white' opacity='0.1'/%3E%3Cellipse cx='90' cy='50' rx='30' ry='10' fill='white' opacity='0.12'/%3E%3C/svg%3E") repeat-x top;
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  /* — Hero Slider — */
+  .c-hero {
+    background: linear-gradient(135deg, var(--primary), var(--primary-600));
+    color: white; padding: 3.5rem 2rem; text-align: center;
+    transition: background 0.3s;
+    position: relative; overflow: hidden;
+  }
+  .c-hero__overlay {
+    position: absolute; inset: 0;
+    background: rgba(0,0,0,0.5);
     transition: background 0.3s;
   }
-  .swatch-label strong { display: block; margin-bottom: 0.15rem; }
-  .swatch-label code { font-size: 0.7rem; color: var(--text-secondary); }
-
-  /* Surface demo */
-  .surface-stack {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 1.5rem;
+  [data-theme="dark"] .c-hero__overlay {
+    background: rgba(0,0,0,0.7);
   }
-  .surface-card {
-    border-radius: 16px;
-    padding: 1.5rem;
-    border: 1px solid var(--border-subtle);
-    transition: all 0.3s;
-  }
-  .surface-card h4 {
-    font-family: 'Rum Raisin', sans-serif;
-    font-size: 1.1rem;
-    margin-bottom: 0.5rem;
-  }
-  .surface-card p {
-    font-size: 0.9rem;
-    color: var(--text-secondary);
-    margin: 0;
+  .c-hero__content { position: relative; z-index: 1; }
+  .c-hero h1 { font-family: 'Rum Raisin', sans-serif; font-size: 2.25rem; margin-bottom: 0.4rem; }
+  .c-hero p { font-family: 'Patrick Hand', cursive; font-size: 1.2rem; opacity: 0.9; margin-bottom: 1.25rem; }
+  .c-hero__btn {
+    display: inline-block; padding: 0.55rem 1.75rem; border-radius: 999px;
+    font-family: 'Rum Raisin', sans-serif; font-size: 1rem;
+    background: var(--secondary); color: var(--dark);
+    border: none; cursor: pointer; letter-spacing: 0.05em;
   }
 
-  /* Typography demo */
-  .type-demo {
-    padding: 2rem;
-    border-radius: 16px;
-    background: var(--bg-surface);
-    border: 1px solid var(--border-subtle);
-    transition: all 0.3s;
+  /* — Immersive Card — */
+  .c-immersive {
+    aspect-ratio: 1; border-radius: 12px; overflow: hidden; position: relative;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
   }
-  .type-demo h1 { font-family: 'Rum Raisin', sans-serif; font-size: 2.5rem; margin-bottom: 0.5rem; }
-  .type-demo h2 { font-family: 'Rum Raisin', sans-serif; font-size: 1.75rem; margin-bottom: 0.5rem; color: var(--text-primary); }
-  .type-demo .body-text { font-family: 'Patrick Hand', cursive; font-size: 1.2rem; margin-bottom: 0.75rem; }
-  .type-demo .secondary-text { color: var(--text-secondary); font-size: 0.95rem; }
+  .c-immersive__img {
+    width: 100%; height: 100%; object-fit: cover;
+    background: linear-gradient(135deg, var(--primary-600), var(--tertiary));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 3rem; color: rgba(255,255,255,0.3);
+  }
+  .c-immersive__badges {
+    position: absolute; top: 0.75rem; left: 0.75rem; right: 0.75rem;
+    display: flex; justify-content: space-between;
+  }
+  .c-immersive__overlay {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    background: linear-gradient(to top, oklch(49.53% 0.0615 161.78 / 0.9), oklch(49.53% 0.0615 161.78 / 0.5), transparent);
+    padding: 5rem 1rem 1rem; color: white;
+    transition: background 0.3s;
+  }
+  [data-theme="dark"] .c-immersive__overlay {
+    background: linear-gradient(to top, rgba(0,0,0,0.92), rgba(0,0,0,0.6), rgba(0,0,0,0.15));
+  }
+  .c-immersive__overlay h3 { font-family: 'Rum Raisin', sans-serif; font-size: 1.1rem; margin-bottom: 0.25rem; }
+  .c-immersive__overlay p { font-size: 0.8rem; opacity: 0.9; line-clamp: 3; }
 
-  /* Button demo */
-  .btn-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    align-items: center;
-    margin-bottom: 1rem;
-  }
-  .btn {
-    padding: 0.65rem 1.75rem;
-    border-radius: 999px;
-    font-family: 'Rum Raisin', sans-serif;
-    font-size: 1rem;
-    cursor: pointer;
-    border: 2px solid transparent;
-    transition: all 0.3s;
-    letter-spacing: 0.05em;
-  }
-  .btn-filled-primary { background: var(--primary); color: var(--btn-text); }
-  .btn-filled-secondary { background: var(--secondary); color: oklch(17.98% 0.0269 90.65); }
-  .btn-filled-tertiary { background: var(--tertiary); color: var(--btn-text); }
-  .btn-outline-primary { background: transparent; border-color: var(--primary); color: var(--primary); }
-  .btn-outline-secondary { background: transparent; border-color: var(--secondary); color: var(--secondary); }
-
-  /* Card component demo */
-  .card-demo {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 1.5rem;
-  }
-  .demo-card {
-    border-radius: 16px;
-    overflow: hidden;
-    background: var(--bg-surface);
-    border: 1px solid var(--border-subtle);
-    transition: all 0.3s;
-  }
-  .demo-card-img {
-    height: 180px;
-    background: linear-gradient(135deg, var(--primary), var(--tertiary));
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-family: 'Rum Raisin', sans-serif;
-    font-size: 1.25rem;
-  }
-  .demo-card-body {
-    padding: 1.25rem;
-  }
-  .demo-card-body h4 {
-    font-family: 'Rum Raisin', sans-serif;
-    font-size: 1.2rem;
-    margin-bottom: 0.5rem;
-  }
-  .demo-card-body p {
-    font-size: 0.9rem;
-    color: var(--text-secondary);
-    margin-bottom: 1rem;
+  /* — Badge — */
+  .c-badge {
+    display: inline-block; padding: 0.15rem 0.6rem; border-radius: 999px;
+    font-size: 0.75rem; font-weight: 600; letter-spacing: 0.03em;
+    box-shadow: inset 0 0 0 1px currentColor;
   }
 
-  /* Form demo */
-  .form-demo {
-    padding: 2rem;
-    border-radius: 16px;
-    background: var(--bg-surface);
-    border: 1px solid var(--border-subtle);
-    max-width: 500px;
+  /* — Button — */
+  .c-btn {
+    padding: 0.45rem 1.25rem; border-radius: 999px; font-family: 'Rum Raisin', sans-serif;
+    font-size: 0.9rem; cursor: pointer; border: none; letter-spacing: 0.05em;
+    transition: all 0.3s; display: inline-flex; align-items: center; gap: 0.3rem;
+  }
+
+  /* — Activity Card — */
+  .c-activity {
+    display: grid; grid-template-columns: 90px 1fr; align-items: stretch;
+    border-radius: 12px; overflow: hidden; background: var(--secondary-50);
+    font-size: 0.85rem; transition: background 0.3s;
+  }
+  .c-activity__img {
+    display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem;
+  }
+  .c-activity__body { padding: 0.65rem 0.85rem; }
+  .c-activity__header { display: flex; align-items: flex-start; justify-content: space-between; gap: 0.5rem; }
+  .c-activity__title { font-family: 'Rum Raisin', sans-serif; font-size: 0.95rem; }
+  .c-activity__time { font-size: 0.75rem; color: var(--text-secondary); opacity: 0.6; transition: color 0.3s; }
+  .c-activity__badge {
+    padding: 0.1rem 0.45rem; border-radius: 999px; font-size: 0.65rem; font-weight: 600;
+    background: var(--blue-100); color: var(--blue-700); white-space: nowrap; transition: all 0.3s;
+  }
+  .c-activity__desc { margin-top: 0.3rem; color: var(--text-secondary); font-size: 0.8rem; transition: color 0.3s; }
+
+  /* — Calendar Card — */
+  .c-calendar {
+    border-radius: 12px; overflow: hidden; background: var(--secondary-50); transition: background 0.3s;
+  }
+  .c-calendar__img {
+    aspect-ratio: 16/9; display: flex; align-items: center; justify-content: center;
+    color: white; font-size: 2rem;
+  }
+  .c-calendar__body { padding: 1rem 1.25rem; display: flex; flex-direction: column; gap: 0.75rem; }
+  .c-calendar__title { font-family: 'Rum Raisin', sans-serif; font-size: 1.1rem; }
+  .c-calendar__row { display: grid; grid-template-columns: auto 1fr; gap: 0.35rem 0.75rem; align-items: center; font-size: 0.85rem; }
+  .c-calendar__label { font-weight: 600; white-space: nowrap; }
+  .c-calendar__badges { display: flex; flex-wrap: wrap; gap: 0.3rem; }
+  .c-calendar__sep { grid-column: 1 / -1; border: 0; border-top: 1px solid rgba(128,128,128,0.15); margin: 0; }
+  .c-calendar__actions {
+    display: flex; justify-content: space-between; align-items: center;
+    border-top: 1px solid rgba(128,128,128,0.15); padding-top: 0.5rem;
+    font-size: 0.85rem; color: var(--primary); transition: color 0.3s;
+  }
+
+  /* — Testimonial Card — */
+  .c-testimonial {
+    border: 2px solid var(--primary); background: var(--bg-surface);
+    border-radius: 12px; padding: 1rem; display: flex; flex-direction: column; gap: 0.5rem;
     transition: all 0.3s;
   }
-  .form-demo label {
-    display: block;
-    font-family: 'Patrick Hand', cursive;
-    font-size: 1.1rem;
-    margin-bottom: 0.25rem;
+  .c-testimonial__header { display: flex; align-items: center; justify-content: space-between; }
+  .c-testimonial__name { font-family: 'Rum Raisin', sans-serif; font-size: 1rem; display: flex; align-items: center; gap: 0.3rem; }
+  .c-testimonial__stars { color: var(--gold-star); font-size: 0.9rem; }
+  .c-testimonial p { font-size: 0.9rem; color: var(--text-secondary); transition: color 0.3s; }
+
+  /* — Summary Card — */
+  .c-summary {
+    border-radius: 12px; border: 1px solid var(--border-subtle);
+    background: var(--bg-surface); overflow: hidden; transition: all 0.3s;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
   }
-  .form-demo input, .form-demo select {
-    width: 100%;
-    padding: 0.6rem 0.75rem;
-    border: 1px solid var(--border-subtle);
-    border-radius: 8px;
-    background: var(--bg-surface-elevated);
+  .c-summary__img {
+    aspect-ratio: 16/9; display: flex; align-items: center; justify-content: center;
+    color: white; font-size: 2rem;
+  }
+  .c-summary__body { padding: 1.25rem; display: flex; flex-direction: column; gap: 0.75rem; }
+  .c-summary__title { font-family: 'Rum Raisin', sans-serif; font-size: 1.15rem; }
+  .c-summary__icon {
+    width: 48px; height: 48px; border-radius: 50%; display: flex;
+    align-items: center; justify-content: center; font-size: 1.25rem;
+  }
+  .c-summary__checklist { list-style: none; display: flex; flex-direction: column; gap: 0.25rem; font-size: 0.85rem; }
+  .c-summary__checklist li { display: flex; align-items: center; gap: 0.35rem; }
+  .c-summary__checklist li i { color: var(--primary); transition: color 0.3s; }
+
+  /* — Alert — */
+  .c-alert {
+    padding: 0.85rem 1rem; border-radius: 0 10px 10px 0;
+    border-left: 3px solid; font-size: 0.85rem; transition: all 0.3s;
+  }
+
+  /* — FAQ / Accordion — */
+  .c-faq {
+    border: 2px solid var(--secondary); background: var(--secondary-50);
+    border-radius: 10px; overflow: hidden; transition: all 0.3s;
+  }
+  .c-faq__summary {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0.75rem 1rem; background: var(--bg-surface); cursor: pointer;
+    font-weight: 600; font-size: 0.9rem; transition: background 0.3s;
+  }
+  .c-faq__answer { padding: 0.75rem 1rem; font-size: 0.85rem; color: var(--text-secondary); transition: color 0.3s; }
+  .c-faq--showcase {
+    border: none; background: var(--tertiary); color: white;
+  }
+  .c-faq--showcase .c-faq__summary {
+    background: transparent; color: white; flex-direction: column; align-items: flex-start;
+  }
+  .c-faq--showcase .c-faq__answer { color: rgba(255,255,255,0.85); }
+
+  /* — Form / Input — */
+  .c-form {
+    padding: 1.5rem; border-radius: 16px; background: var(--bg-surface);
+    border: 1px solid var(--border-subtle); transition: all 0.3s;
+  }
+  .c-form label { display: block; font-family: 'Patrick Hand', cursive; font-size: 1rem; margin-bottom: 0.15rem; }
+  .c-form input, .c-form select {
+    width: 100%; padding: 0.5rem 0.7rem; border: 1px solid var(--border-subtle);
+    border-radius: 8px; background: var(--bg-surface-elevated); color: var(--text-primary);
+    font-size: 0.9rem; margin-bottom: 0.65rem; transition: all 0.3s;
+  }
+  .c-form input:focus, .c-form select:focus { outline: 2px solid var(--primary); outline-offset: 2px; }
+
+  /* — Dialog — */
+  .c-dialog {
+    max-width: 480px; border-radius: 12px; background: var(--bg-surface);
+    padding: 1.5rem; box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+    border: 1px solid var(--border-subtle); transition: all 0.3s;
+  }
+  .c-dialog__header { display: flex; justify-content: space-between; margin-bottom: 0.75rem; }
+  .c-dialog__title { font-size: 1.1rem; font-weight: 700; }
+  .c-dialog__close { background: none; border: none; cursor: pointer; font-size: 1rem; color: var(--text-secondary); transition: color 0.3s; }
+  .c-dialog__desc { font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 1rem; transition: color 0.3s; }
+
+  /* — Cookie Consent — */
+  .c-cookie {
+    border-radius: 16px; border: 1px solid var(--border-subtle);
+    background: var(--bg-surface); padding: 1rem 1.25rem;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.1); backdrop-filter: blur(8px);
+    transition: all 0.3s;
+  }
+  .c-cookie__inner { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; }
+  .c-cookie__text { font-size: 0.8rem; flex: 1; }
+  .c-cookie__actions { display: flex; align-items: center; gap: 0.75rem; white-space: nowrap; }
+  .c-cookie__reject { font-size: 0.8rem; background: none; border: none; cursor: pointer; color: var(--text-primary); transition: color 0.3s; }
+
+  /* — Pricing Table — */
+  .c-table {
+    width: 100%; border-collapse: collapse; font-size: 0.85rem; transition: color 0.3s;
+  }
+  .c-table thead { background: var(--secondary); color: var(--dark); }
+  .c-table th { padding: 0.5rem 0.75rem; text-align: left; font-family: 'Rum Raisin', sans-serif; font-weight: normal; }
+  .c-table td { padding: 0.5rem 0.75rem; border-bottom: 1px solid var(--border-subtle); transition: border-color 0.3s; }
+  .c-table tbody tr:nth-child(even) { background: var(--bg-surface-elevated); transition: background 0.3s; }
+
+  /* — Subscribe — */
+  .c-subscribe {
+    background: var(--primary); color: white; padding: 2rem; border-radius: 12px;
+  }
+  .c-subscribe__inner { max-width: 500px; margin: 0 auto; text-align: center; }
+  .c-subscribe h3 { font-family: 'Rum Raisin', sans-serif; font-size: 1.4rem; margin-bottom: 0.5rem; }
+  .c-subscribe p { font-family: 'Patrick Hand', cursive; font-size: 1rem; margin-bottom: 1rem; opacity: 0.9; }
+  .c-subscribe__form { display: flex; gap: 0.5rem; }
+  .c-subscribe__input {
+    flex: 1; padding: 0.5rem 0.75rem; border-radius: 8px; border: 1px solid rgba(255,255,255,0.3);
+    background: rgba(255,255,255,0.15); color: white; font-size: 0.9rem;
+  }
+  .c-subscribe__input::placeholder { color: rgba(255,255,255,0.6); }
+
+  /* — Call To Action — */
+  .c-cta {
+    border-radius: 12px; padding: 1.5rem; transition: all 0.3s;
+  }
+  .c-cta__items { display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.75rem; }
+  .c-cta__item {
+    display: flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1rem;
+    border-radius: 8px; font-size: 0.9rem; transition: all 0.3s;
+  }
+
+  /* — Trapezoid heading — */
+  .c-trapezoid {
+    display: inline-flex; align-items: stretch;
+  }
+  .c-trapezoid__body {
+    padding: 0.25rem 0.75rem; font-family: 'Rum Raisin', sans-serif;
+    font-size: 1.15rem; display: flex; align-items: center;
+  }
+  .c-trapezoid__tail {
+    width: 20px; overflow: hidden; display: flex; align-items: stretch;
+  }
+  .c-trapezoid__tail svg { width: 100%; height: 100%; }
+
+  /* — Footer — */
+  .c-footer { background: var(--primary); color: var(--light); border-top: 3px solid oklch(91.78% 0.0185 166.35); }
+  .c-footer__inner {
+    max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1.2fr 1fr 1fr 1fr;
+    gap: 1.25rem; padding: 1.25rem 1.5rem;
+  }
+  .c-footer__logo-col { display: flex; flex-direction: column; gap: 0.6rem; }
+  .c-footer__logo {
+    width: 55px; height: 55px; border-radius: 50%; background: rgba(255,255,255,0.15);
+    display: flex; align-items: center; justify-content: center; color: white;
+    font-family: 'Rum Raisin', sans-serif; font-size: 0.45rem; text-align: center; line-height: 1.1;
+  }
+  .c-footer__tagline { font-size: 0.8rem; opacity: 0.9; }
+  .c-footer__col h4 { font-family: 'Rum Raisin', sans-serif; font-size: 0.9rem; margin-bottom: 0.4rem; opacity: 0.9; }
+  .c-footer__col ul { list-style: none; font-family: 'Patrick Hand', cursive; font-size: 0.85rem; }
+  .c-footer__col ul li { margin-bottom: 0.2rem; opacity: 0.8; }
+  .c-footer__bottom {
+    background: black; color: white; padding: 0.75rem 1.5rem;
+    display: flex; align-items: center; justify-content: space-between;
+    font-size: 0.7rem;
+  }
+  .c-footer__payments { display: flex; gap: 0.35rem; }
+  .c-footer__payment {
+    background: white; color: #333; border-radius: 4px; padding: 0.1rem 0.35rem;
+    font-size: 0.6rem; font-weight: 700;
+  }
+  .c-footer__social { display: flex; gap: 0.6rem; font-size: 1rem; }
+  .c-footer__social a { color: inherit; opacity: 0.7; }
+
+  /* ═══════════════════════════════════════════════
+     UTILITIES
+     ═══════════════════════════════════════════════ */
+  /* — Search — */
+  .c-search {
+    display: flex; align-items: stretch; max-width: 600px; transition: all 0.3s;
+  }
+  .c-search select {
+    border: 1px solid var(--border-subtle); border-right: 0;
+    border-radius: 8px 0 0 8px; padding: 0.5rem 0.6rem;
+    background: var(--bg-surface); color: var(--text-primary);
+    font-size: 0.85rem; transition: all 0.3s;
+  }
+  .c-search input {
+    flex: 1; border: 1px solid var(--border-subtle);
+    padding: 0.5rem 0.6rem; background: var(--bg-surface);
+    color: var(--text-primary); font-size: 0.85rem; transition: all 0.3s;
+  }
+  .c-search__btn {
+    border: 1px solid var(--primary); border-radius: 0 8px 8px 0;
+    padding: 0.5rem 1rem; background: var(--primary);
+    color: var(--btn-text); font-size: 0.85rem; cursor: pointer;
+    transition: all 0.3s;
+  }
+
+  /* — SlimNavigation — */
+  .c-slim-nav {
+    background: var(--primary); color: var(--light);
+    padding: 0.5rem 1.5rem; transition: all 0.3s;
+  }
+  .c-slim-nav__inner {
+    display: flex; align-items: center; justify-content: space-between;
+    max-width: 1200px; margin: 0 auto; font-size: 0.9rem;
+  }
+
+  /* — CheckoutComplete — */
+  .c-checkout-complete__section {
+    border-radius: 12px; border: 1px solid var(--border-subtle);
+    padding: 1.25rem; transition: all 0.3s;
+  }
+
+  /* — SeasonalFeature — */
+  .c-seasonal {
+    border-radius: 12px; overflow: hidden;
+    display: grid; grid-template-columns: 1fr 1fr;
+    transition: all 0.3s;
+  }
+  .c-seasonal__img {
+    display: flex; align-items: center; justify-content: center;
+    color: white; font-size: 2.5rem; min-height: 250px;
+  }
+  .c-seasonal__body { padding: 1.5rem; display: flex; flex-direction: column; gap: 0.75rem; }
+  .c-seasonal__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; }
+  .c-seasonal__attr {
+    padding: 0.65rem; border-radius: 8px; font-size: 0.85rem;
+    display: flex; align-items: center; gap: 0.4rem; transition: all 0.3s;
+  }
+  [data-theme="dark"] .c-seasonal--gradient {
+    background: linear-gradient(135deg, oklch(25% 0.04 350), oklch(22% 0.03 162)) !important;
     color: var(--text-primary);
-    font-size: 1rem;
-    margin-bottom: 1rem;
-    transition: all 0.3s;
   }
-  .form-demo input:focus, .form-demo select:focus {
-    outline: 2px solid var(--primary);
-    outline-offset: 2px;
+  [data-theme="dark"] .c-seasonal--gradient .c-seasonal__attr {
+    background: rgba(255,255,255,0.08) !important;
   }
 
-  /* Header/footer demo */
-  .header-demo {
-    padding: 1rem 1.5rem;
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    transition: all 0.3s;
-    margin-bottom: 1rem;
+  /* — WaveWrapper — */
+  .c-wave {
+    position: relative; padding: 2rem;
+    clip-path: polygon(0 8%, 5% 4%, 10% 2%, 20% 0%, 30% 1%, 40% 3%, 50% 4%, 60% 3%, 70% 1%, 80% 0%, 90% 2%, 95% 4%, 100% 8%, 100% 100%, 0 100%);
+    transition: background 0.3s;
   }
-  .header-demo nav {
-    display: flex;
-    gap: 1.5rem;
-    font-family: 'Patrick Hand', cursive;
-    font-size: 1.1rem;
-  }
-  .header-demo nav a {
-    color: inherit;
-    text-decoration: none;
-    opacity: 0.85;
-  }
-  .header-demo nav a:hover { opacity: 1; }
-  .header-demo .logo {
-    font-family: 'Rum Raisin', sans-serif;
-    font-size: 1.3rem;
+  .c-wave__pattern {
+    position: absolute; inset: 0; opacity: 0.08;
+    background: repeating-linear-gradient(45deg, currentColor 0px, currentColor 2px, transparent 2px, transparent 12px);
+    pointer-events: none;
   }
 
-  .footer-demo {
-    padding: 1.5rem;
-    border-radius: 12px;
-    text-align: center;
+  /* — QuickInfo — */
+  .c-quickinfo {
+    border-radius: 12px; padding: 1.25rem; transition: all 0.3s;
+  }
+  .c-quickinfo__items { display: flex; gap: 0.75rem; }
+  .c-quickinfo__item {
+    flex: 1; border-radius: 8px; padding: 0.65rem 0.85rem;
+    display: flex; align-items: center; gap: 0.6rem;
+    font-size: 0.85rem; transition: all 0.3s;
+  }
+  .c-quickinfo__icon {
+    width: 36px; height: 36px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem; flex-shrink: 0; transition: all 0.3s;
+  }
+
+  /* — Timeline — */
+  .c-timeline {
+    border-left: 4px solid var(--secondary); padding-left: 1.5rem;
+    display: flex; flex-direction: column; gap: 0.75rem;
+    transition: border-color 0.3s;
+  }
+  .c-timeline__marker {
+    display: flex; align-items: center; gap: 0.5rem;
+    margin-left: -1.85rem; font-size: 0.9rem;
+    color: var(--text-secondary); transition: color 0.3s;
+  }
+  .c-timeline__dot {
+    width: 12px; height: 12px; border-radius: 50%;
+    background: var(--primary); flex-shrink: 0; transition: background 0.3s;
+  }
+
+  /* — Checkout — */
+  .c-checkout {
+    display: grid; grid-template-columns: 1.5fr 1fr; gap: 1.25rem;
+  }
+  .c-checkout__panel {
+    border-radius: 12px; border: 1px solid var(--border-subtle);
+    background: var(--bg-surface); padding: 1.25rem; transition: all 0.3s;
+  }
+  .c-checkout__summary {
+    border-radius: 12px; background: var(--bg-surface-elevated);
+    border: 1px solid var(--border-subtle); padding: 1.25rem; transition: all 0.3s;
+  }
+  .c-checkout__row {
+    display: flex; justify-content: space-between; padding: 0.35rem 0;
     font-size: 0.85rem;
-    transition: all 0.3s;
   }
 
-  /* Palette scale */
-  .palette-row {
-    display: flex;
-    border-radius: 12px;
-    overflow: hidden;
-    margin-bottom: 1rem;
+  /* — EventOverview — */
+  .c-event-overview {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+    align-items: stretch;
   }
-  .palette-cell {
-    flex: 1;
-    height: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.65rem;
-    font-weight: 600;
-    transition: all 0.3s;
+  .c-event-overview__cover {
+    border-radius: 12px; position: relative; overflow: hidden;
+    display: flex; align-items: flex-end; justify-content: center;
+    padding: 1.5rem; min-height: 220px;
   }
-
-  /* Indicator */
-  .mode-label {
-    display: inline-block;
-    padding: 0.25rem 0.75rem;
-    border-radius: 999px;
-    font-size: 0.8rem;
-    font-weight: 600;
-    background: var(--primary);
-    color: var(--btn-text);
-    margin-bottom: 0.5rem;
+  .c-event-overview__overlay {
+    position: absolute; inset: 0; background: rgba(0,0,0,0.4);
+    transition: background 0.3s;
+  }
+  [data-theme="dark"] .c-event-overview__overlay {
+    background: rgba(0,0,0,0.65);
   }
 
-  /* Alert demo */
-  .alert {
-    padding: 1rem 1.25rem;
-    border-radius: 12px;
-    border-left: 4px solid;
-    margin-bottom: 1rem;
-    font-size: 0.95rem;
+  /* — CardPromo — */
+  .c-card-promo {
+    display: flex; gap: 1rem; overflow-x: auto; padding-bottom: 0.5rem;
   }
-  .alert-success { border-color: var(--primary); background: oklch(from var(--primary) l c h / 0.1); }
-  .alert-warning { border-color: var(--secondary); background: oklch(from var(--secondary) l c h / 0.1); }
-  .alert-info { border-color: var(--blue); background: oklch(from var(--blue) l c h / 0.1); }
+  .c-card-promo__card {
+    flex-shrink: 0; width: 220px; border-radius: 12px;
+    padding: 1.25rem; position: relative; overflow: hidden;
+    color: white; transition: all 0.3s;
+  }
+  .c-card-promo__card h4 { font-family: 'Rum Raisin', sans-serif; font-size: 1.1rem; margin-bottom: 0.5rem; }
+  .c-card-promo__card p { font-size: 0.8rem; opacity: 0.85; }
+  .c-card-promo__label { font-size: 0.7rem; opacity: 0.7; margin-bottom: 0.1rem; }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.25rem; }
+  .grid-4 { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 1rem; }
+  .stack { display: flex; flex-direction: column; gap: 0.75rem; }
+  .row { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; }
+  .max-sm { max-width: 400px; }
+  .max-md { max-width: 550px; }
 </style>
 </head>
 <body>
-<div class="toggle-bar">
-  <h1>Attwell Farm Park — Dark Mode Preview</h1>
-  <button class="toggle-btn" onclick="toggleTheme()" id="toggle-btn">Switch to Dark Mode</button>
+
+<!-- ═══════════════════════════════════════════════════
+     TOOLBAR
+     ═══════════════════════════════════════════════════ -->
+<div class="toolbar">
+  <h1>Component Reference Sheet</h1>
+  <div class="toolbar__controls">
+    <button class="toolbar__btn toolbar__btn--outline" onclick="scrollToSection('deepens')">Brand surfaces</button>
+    <button class="toolbar__btn toolbar__btn--outline" onclick="scrollToSection('adapts')">Page surfaces</button>
+    <button class="toolbar__btn" onclick="toggleTheme()" id="toggle-btn">Switch to Dark</button>
+  </div>
 </div>
 
-<div class="container">
 
-  <!-- Mode indicator -->
-  <section>
-    <span class="mode-label" id="mode-label">Light Mode</span>
-    <p>This preview shows how the Attwell Farm Park website will look in both light and dark modes. Use the toggle above to switch between them. All colours are derived from the existing brand palette.</p>
-  </section>
+<!-- ═══════════════════════════════════════════════════════════
+     BRAND-SURFACE COMPONENTS (bg-primary / bg-secondary)
+     ═══════════════════════════════════════════════════════════ -->
+<div id="deepens"></div>
 
-  <!-- Core palette -->
-  <section>
-    <h2>Core Palette</h2>
-
-    <h3>Primary (Green)</h3>
-    <div class="palette-row">
-      <div class="palette-cell" style="background: oklch(96% 0.01 164.87); color: #333;">50</div>
-      <div class="palette-cell" style="background: oklch(91.78% 0.0185 166.35); color: #333;">100</div>
-      <div class="palette-cell" style="background: oklch(82.89% 0.0416 164.52); color: #333;">200</div>
-      <div class="palette-cell" style="background: oklch(74.41% 0.0625 163.2); color: #333;">300</div>
-      <div class="palette-cell" style="background: oklch(65.63% 0.0821 162.32); color: #fff;">400</div>
-      <div class="palette-cell" style="background: oklch(57.71% 0.0724 161.64); color: #fff;">500</div>
-      <div class="palette-cell" style="background: oklch(49.53% 0.0615 161.78); color: #fff;">600</div>
-      <div class="palette-cell" style="background: oklch(40.05% 0.0477 162.18); color: #fff;">700</div>
-      <div class="palette-cell" style="background: oklch(31.09% 0.0335 164.13); color: #fff;">800</div>
-      <div class="palette-cell" style="background: oklch(20.52% 0.0188 164.72); color: #fff;">900</div>
-      <div class="palette-cell" style="background: oklch(15.22% 0.0104 159.24); color: #fff;">950</div>
+<!-- ─── 1. ANNOUNCEMENT BAR ──────────────────────── -->
+<div class="ref-section">
+  <div class="ref-section__header">
+    <h2>AnnouncementBar</h2>
+    <span class="badge-adapts">Deepens</span>
+  </div>
+  <div class="ref-section__meta">
+    sections/site-header/announcement-bar/AnnouncementBar.svelte
+  </div>
+  <div class="ref-section__body">
+    <div class="c-announcement" style="border-radius: 10px;">
+      <div class="c-announcement__inner">
+        <span class="c-announcement__text">
+          Half term activities now available — Book online for best prices <i class="bi bi-arrow-right"></i>
+        </span>
+      </div>
+      <button class="c-announcement__close"><i class="bi bi-x-lg"></i></button>
     </div>
-
-    <h3>Secondary (Yellow)</h3>
-    <div class="palette-row">
-      <div class="palette-cell" style="background: oklch(96.97% 0.0217 92.5); color: #333;">50</div>
-      <div class="palette-cell" style="background: oklch(93.86% 0.0427 89.36); color: #333;">100</div>
-      <div class="palette-cell" style="background: oklch(88.06% 0.0845 90.3); color: #333;">200</div>
-      <div class="palette-cell" style="background: oklch(82.68% 0.1195 90.31); color: #333;">300</div>
-      <div class="palette-cell" style="background: oklch(78.2% 0.1394 88.06); color: #333;">400</div>
-      <div class="palette-cell" style="background: oklch(71.46% 0.1369 86.68); color: #fff;">500</div>
-      <div class="palette-cell" style="background: oklch(60.85% 0.1156 86.46); color: #fff;">600</div>
-      <div class="palette-cell" style="background: oklch(49.96% 0.0937 87.13); color: #fff;">700</div>
-      <div class="palette-cell" style="background: oklch(36.89% 0.0664 88.06); color: #fff;">800</div>
-      <div class="palette-cell" style="background: oklch(24% 0.0391 87.84); color: #fff;">900</div>
-      <div class="palette-cell" style="background: oklch(17.98% 0.0269 90.65); color: #fff;">950</div>
-    </div>
-
-    <h3>Tertiary (Purple)</h3>
-    <div class="palette-row">
-      <div class="palette-cell" style="background: oklch(97.2% 0.0062 255.47); color: #333;">50</div>
-      <div class="palette-cell" style="background: oklch(94.81% 0.0103 261.79); color: #333;">100</div>
-      <div class="palette-cell" style="background: oklch(90.45% 0.0198 260.17); color: #333;">200</div>
-      <div class="palette-cell" style="background: oklch(84.26% 0.0321 261.73); color: #333;">300</div>
-      <div class="palette-cell" style="background: oklch(76.53% 0.0492 269.48); color: #333;">400</div>
-      <div class="palette-cell" style="background: oklch(72.12% 0.0579 273.63); color: #fff;">500</div>
-      <div class="palette-cell" style="background: oklch(60.88% 0.0823 277.97); color: #fff;">600</div>
-      <div class="palette-cell" style="background: oklch(54.13% 0.0798 279.07); color: #fff;">700</div>
-      <div class="palette-cell" style="background: oklch(47.78% 0.0602 276.77); color: #fff;">800</div>
-      <div class="palette-cell" style="background: oklch(42.65% 0.0437 275.95); color: #fff;">900</div>
-      <div class="palette-cell" style="background: oklch(29.83% 0.0291 278.93); color: #fff;">950</div>
-    </div>
-  </section>
-
-  <!-- Token mapping -->
-  <section>
-    <h2>Semantic Token Mapping</h2>
-    <div class="swatch-grid">
-      <div class="swatch">
-        <div class="swatch-color" style="background: var(--bg);"></div>
-        <div class="swatch-label"><strong>Page Background</strong><code>--bg</code></div>
-      </div>
-      <div class="swatch">
-        <div class="swatch-color" style="background: var(--bg-surface);"></div>
-        <div class="swatch-label"><strong>Surface (Cards)</strong><code>--bg-surface</code></div>
-      </div>
-      <div class="swatch">
-        <div class="swatch-color" style="background: var(--bg-surface-elevated);"></div>
-        <div class="swatch-label"><strong>Elevated (Header)</strong><code>--bg-surface-elevated</code></div>
-      </div>
-      <div class="swatch">
-        <div class="swatch-color" style="background: var(--bg-surface-highest);"></div>
-        <div class="swatch-label"><strong>Highest (Modals)</strong><code>--bg-surface-highest</code></div>
-      </div>
-      <div class="swatch">
-        <div class="swatch-color" style="background: var(--primary);"></div>
-        <div class="swatch-label"><strong>Primary</strong><code>--primary</code></div>
-      </div>
-      <div class="swatch">
-        <div class="swatch-color" style="background: var(--secondary);"></div>
-        <div class="swatch-label"><strong>Secondary</strong><code>--secondary</code></div>
-      </div>
-      <div class="swatch">
-        <div class="swatch-color" style="background: var(--tertiary);"></div>
-        <div class="swatch-label"><strong>Tertiary</strong><code>--tertiary</code></div>
-      </div>
-      <div class="swatch">
-        <div class="swatch-color" style="background: var(--border-subtle);"></div>
-        <div class="swatch-label"><strong>Border</strong><code>--border-subtle</code></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Surface elevation -->
-  <section>
-    <h2>Surface Elevation</h2>
-    <p class="font-body" style="font-size: 1.1rem;">In dark mode, elevation is expressed through lighter surfaces rather than shadows. Higher elements use progressively lighter backgrounds.</p>
-    <div class="surface-stack">
-      <div class="surface-card" style="background: var(--bg);">
-        <h4>Base Layer</h4>
-        <p>Page background — the darkest surface</p>
-      </div>
-      <div class="surface-card" style="background: var(--bg-surface);">
-        <h4>Surface 1</h4>
-        <p>Cards, content sections, panels</p>
-      </div>
-      <div class="surface-card" style="background: var(--bg-surface-elevated);">
-        <h4>Surface 2</h4>
-        <p>Header, navigation, dropdowns</p>
-      </div>
-      <div class="surface-card" style="background: var(--bg-surface-highest);">
-        <h4>Surface 3</h4>
-        <p>Modals, dialogs, tooltips</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Typography -->
-  <section>
-    <h2>Typography</h2>
-    <div class="type-demo">
-      <h1>Welcome to Attwell Farm Park</h1>
-      <h2>Fun for all the family</h2>
-      <p class="body-text">Come and enjoy our award-winning farm park with over 20 attractions, amazing animals, and delicious food. There's something for everyone at Attwell Farm Park!</p>
-      <p class="secondary-text">Open daily from 10am — Book online for the best prices</p>
-    </div>
-  </section>
-
-  <!-- Buttons -->
-  <section>
-    <h2>Buttons</h2>
-    <div class="btn-row">
-      <button class="btn btn-filled-primary">Book Online</button>
-      <button class="btn btn-filled-secondary">Become a Member</button>
-      <button class="btn btn-filled-tertiary">Explore</button>
-    </div>
-    <div class="btn-row">
-      <button class="btn btn-outline-primary">View Prices</button>
-      <button class="btn btn-outline-secondary">What's On</button>
-    </div>
-  </section>
-
-  <!-- Cards -->
-  <section>
-    <h2>Cards</h2>
-    <div class="card-demo">
-      <div class="demo-card">
-        <div class="demo-card-img">Indoor Soft Play</div>
-        <div class="demo-card-body">
-          <h4>Indoor Soft Play</h4>
-          <p>Three exciting zones of soft play fun for children of all ages. Suitable for ages 0-12.</p>
-          <button class="btn btn-filled-primary" style="font-size: 0.9rem; padding: 0.5rem 1.25rem;">Find out more</button>
-        </div>
-      </div>
-      <div class="demo-card">
-        <div class="demo-card-img" style="background: linear-gradient(135deg, var(--secondary), oklch(71.46% 0.1369 86.68));">Petting Barn</div>
-        <div class="demo-card-body">
-          <h4>Petting Barn</h4>
-          <p>Get up close with our friendly animals. Meet goats, sheep, rabbits, and guinea pigs.</p>
-          <button class="btn btn-filled-primary" style="font-size: 0.9rem; padding: 0.5rem 1.25rem;">Find out more</button>
-        </div>
-      </div>
-      <div class="demo-card">
-        <div class="demo-card-img" style="background: linear-gradient(135deg, var(--tertiary), var(--blue));">Giant Jumping Pillow</div>
-        <div class="demo-card-body">
-          <h4>Giant Jumping Pillow</h4>
-          <p>Bounce away on our giant outdoor jumping pillow. One of our most popular attractions!</p>
-          <button class="btn btn-filled-primary" style="font-size: 0.9rem; padding: 0.5rem 1.25rem;">Find out more</button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Header/Footer -->
-  <section>
-    <h2>Header &amp; Footer</h2>
-    <div class="header-demo" style="background: var(--bg-surface-elevated); border: 1px solid var(--border-subtle);">
-      <span class="logo">Attwell Farm Park</span>
-      <nav>
-        <a href="#">Explore</a>
-        <a href="#">What's On</a>
-        <a href="#">Plan Your Visit</a>
-        <a href="#">Book Online</a>
-      </nav>
-    </div>
-    <div class="footer-demo" style="background: oklch(12% 0.008 162); color: oklch(80% 0.01 90);">
-      &copy; 2026 Attwell Farm Park. Championing sustainability, accessibility and family fun all year round.
-    </div>
-  </section>
-
-  <!-- Form -->
-  <section>
-    <h2>Form Fields</h2>
-    <div class="form-demo">
-      <label for="name">Full Name</label>
-      <input type="text" id="name" placeholder="Enter your name">
-      <label for="email">Email Address</label>
-      <input type="email" id="email" placeholder="you@example.com">
-      <label for="tickets">Number of Tickets</label>
-      <select id="tickets">
-        <option>1 Adult</option>
-        <option>2 Adults</option>
-        <option>Family (2+2)</option>
-      </select>
-      <button class="btn btn-filled-primary" style="width: 100%;">Book Now</button>
-    </div>
-  </section>
-
-  <!-- Alerts -->
-  <section>
-    <h2>Alerts &amp; Notices</h2>
-    <div class="alert alert-success">Your booking has been confirmed. Check your email for details.</div>
-    <div class="alert alert-warning">Limited availability — only a few slots remaining for this date.</div>
-    <div class="alert alert-info">The farm park is open daily from 10am to 5pm during half term.</div>
-  </section>
-
-  <!-- Design notes -->
-  <section>
-    <h2>Design Notes</h2>
-    <div class="type-demo">
-      <h2 style="font-size: 1.25rem;">Key Principles</h2>
-      <ul style="list-style: disc; padding-left: 1.5rem; margin-bottom: 1rem; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.8;">
-        <li><strong style="color: var(--text-primary);">No pure black</strong> — backgrounds use dark green (primary-950) to maintain brand identity</li>
-        <li><strong style="color: var(--text-primary);">No pure white text</strong> — off-white with warm tint reduces eye strain</li>
-        <li><strong style="color: var(--text-primary);">Lighter accents</strong> — primary shifts from 400→300, secondary from 300→200 for contrast on dark</li>
-        <li><strong style="color: var(--text-primary);">Elevation via lightness</strong> — higher surfaces are lighter, not shadowed</li>
-        <li><strong style="color: var(--text-primary);">Brand-tinted darks</strong> — all surfaces carry a subtle green hue (162)</li>
-      </ul>
-    </div>
-  </section>
-
+    <table class="token-table" style="margin-top: 0.75rem;">
+      <tr><td><span class="token-swatch" style="background: var(--secondary);"></span></td><td class="token-name">--secondary</td><td class="token-class">colorMap['secondary'] → bg-secondary text-dark — same token as buttons, badges, etc.</td></tr>
+      <tr><td><span class="token-swatch" style="background: var(--dark);"></span></td><td class="token-name">--dark</td><td class="token-class">text-dark inverts via --dark token (light: brown → dark: off-white)</td></tr>
+      <tr><td></td><td class="token-name">result</td><td class="token-class">Yellow-300 → amber-700 everywhere that uses bg-secondary</td></tr>
+    </table>
+  </div>
 </div>
 
+<!-- ─── 2. INFORMATION BAR ──────────────────────── -->
+<div class="ref-section">
+  <div class="ref-section__header">
+    <h2>InformationBar</h2>
+    <span class="badge-adapts">Deepens</span>
+  </div>
+  <div class="ref-section__meta">
+    sections/site-header/information-bar/InformationBar.svelte
+  </div>
+  <div class="ref-section__body">
+    <div class="c-info-bar" style="border-radius: 10px;">
+      <div class="c-info-bar__inner">
+        <div class="c-info-bar__group"><i class="bi bi-clock"></i> <span>Today 10:00 – 17:00</span> <i class="bi bi-chevron-down" style="font-size:0.65rem;opacity:0.7;"></i></div>
+        <div class="c-info-bar__group"><i class="bi bi-chevron-down" style="font-size:0.65rem;opacity:0.7;"></i> <span>From £12.95</span> <i class="bi bi-ticket-perforated"></i></div>
+      </div>
+    </div>
+    <table class="token-table" style="margin-top: 0.75rem;">
+      <tr><td><span class="token-swatch" style="background: var(--primary);"></span></td><td class="token-name">--primary</td><td class="token-class">colorMap['primary'] → bg-primary text-light — same token as nav, footer, buttons</td></tr>
+      <tr><td><span class="token-swatch" style="background: var(--light);"></span></td><td class="token-name">--light</td><td class="token-class">text-light inverts via --light token (light: white → dark: dark-green)</td></tr>
+      <tr><td></td><td class="token-name">result</td><td class="token-class">Green-400 → green-800 everywhere that uses bg-primary</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- ─── 3. CANVAS MENU ──────────────────────── -->
+<div class="ref-section">
+  <div class="ref-section__header">
+    <h2>CanvasMenu</h2>
+    <span class="badge-adapts">Deepens</span>
+  </div>
+  <div class="ref-section__meta">
+    sections/site-header/canvas-menu/CanvasMenu.svelte
+  </div>
+  <div class="ref-section__body">
+    <div class="c-canvas">
+      <div class="c-canvas__bg">🐄 🐄 🐄 🐄 🐄 🐄 🐄 🐄 🐄 🐄 🐄 🐄 🐄 🐄 🐄 🐄</div>
+      <div class="c-canvas__inner">
+        <div class="c-canvas__nav-items">
+          <div class="c-canvas__nav-item">Explore</div>
+          <div class="c-canvas__nav-item">What's On</div>
+          <div class="c-canvas__nav-item">Plan Your Visit</div>
+          <div class="c-canvas__nav-item">Book Online</div>
+          <div class="c-canvas__nav-item">About Us</div>
+        </div>
+        <div class="c-canvas__contact">
+          <div class="c-canvas__contact-item"><i class="bi bi-telephone"></i> 01234 567890</div>
+          <div class="c-canvas__contact-item"><i class="bi bi-envelope"></i> hello@attwellfarmpark.co.uk</div>
+          <div class="c-canvas__contact-item"><i class="bi bi-geo-alt"></i> Bromsgrove, Worcestershire</div>
+          <div style="display: flex; gap: 0.5rem; font-size: 1.3rem; margin-top: 0.5rem;">
+            <i class="bi bi-facebook"></i> <i class="bi bi-instagram"></i> <i class="bi bi-tiktok"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+    <table class="token-table" style="margin-top: 0.75rem;">
+      <tr><td><span class="token-swatch" style="background: var(--primary);"></span></td><td class="token-name">--primary</td><td class="token-class">bg-primary — same token as info bar, footer, buttons. All shift together.</td></tr>
+      <tr><td><span class="token-swatch" style="background: var(--light);"></span></td><td class="token-name">--light</td><td class="token-class">text-light on green — inverts via same token</td></tr>
+      <tr><td></td><td class="token-name">contact items</td><td class="token-class">bg-black/20 — relative opacity, naturally subtler on darker bg</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- ─── 4. SUBSCRIBE ──────────────────────── -->
+<div class="ref-section">
+  <div class="ref-section__header">
+    <h2>Subscribe</h2>
+    <span class="badge-adapts">Deepens</span>
+  </div>
+  <div class="ref-section__meta">
+    sections/subscribe/Subscribe.svelte
+  </div>
+  <div class="ref-section__body">
+    <div class="c-subscribe">
+      <div class="c-subscribe__inner">
+        <h3>Join Our Moo-Mail</h3>
+        <p>Get the latest news, events and exclusive offers straight to your inbox</p>
+        <div class="c-subscribe__form">
+          <input class="c-subscribe__input" placeholder="your@email.com">
+          <button class="c-btn" style="background: var(--secondary); color: var(--dark);">Subscribe</button>
+        </div>
+      </div>
+    </div>
+    <table class="token-table" style="margin-top: 0.75rem;">
+      <tr><td><span class="token-swatch" style="background: var(--primary);"></span></td><td class="token-name">--primary</td><td class="token-class">bg-primary — shifts with everything else. Same deep green.</td></tr>
+      <tr><td><span class="token-swatch" style="background: var(--light);"></span></td><td class="token-name">--light</td><td class="token-class">text-light — inverts via token</td></tr>
+      <tr><td></td><td class="token-name">grass SVG</td><td class="token-class">grassBg('#60A182') is hardcoded — needs to read from token or darken</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- ─── 5. FOOTER ──────────────────────── -->
+<div class="ref-section">
+  <div class="ref-section__header">
+    <h2>SiteFooter</h2>
+    <span class="badge-adapts">Deepens</span>
+  </div>
+  <div class="ref-section__meta">
+    sections/site-footer/SiteFooter.svelte
+  </div>
+  <div class="ref-section__body">
+    <div style="border-radius: 12px; overflow: hidden;">
+      <div class="c-footer">
+        <div class="c-footer__inner">
+          <div class="c-footer__logo-col">
+            <div class="c-footer__logo">Attwell<br>Farm<br>Park</div>
+            <span class="c-footer__tagline">Championing sustainability, accessibility and family fun all year round.</span>
+          </div>
+          <div class="c-footer__col"><h4>Explore</h4><ul><li>Attractions</li><li>Animals</li><li>Events</li><li>Food & Drink</li></ul></div>
+          <div class="c-footer__col"><h4>Plan Your Visit</h4><ul><li>Opening Times</li><li>Prices</li><li>Getting Here</li><li>Accessibility</li></ul></div>
+          <div class="c-footer__col"><h4>About Us</h4><ul><li>Our Story</li><li>Sustainability</li><li>Careers</li><li>Contact</li></ul></div>
+        </div>
+        <div class="c-footer__bottom">
+          <div class="c-footer__payments">
+            <span class="c-footer__payment">VISA</span>
+            <span class="c-footer__payment">MC</span>
+            <span class="c-footer__payment"><i class="bi bi-apple"></i> Pay</span>
+            <span class="c-footer__payment">G Pay</span>
+          </div>
+          <small>&copy; 2026 Attwell Farm Park Ltd — Bromsgrove District Council License No. 22/06420/ANIACT</small>
+          <div class="c-footer__social">
+            <a href="#"><i class="bi bi-facebook"></i></a>
+            <a href="#"><i class="bi bi-instagram"></i></a>
+            <a href="#"><i class="bi bi-tiktok"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <table class="token-table" style="margin-top: 0.75rem;">
+      <tr><td><span class="token-swatch" style="background: var(--primary);"></span></td><td class="token-name">--primary</td><td class="token-class">bg-primary — same token, same shift as info bar, nav, canvas menu</td></tr>
+      <tr><td><span class="token-swatch" style="background: #000;"></span></td><td class="token-name">bg-black</td><td class="token-class">Bottom bar hardcoded black — already dark, no change needed</td></tr>
+      <tr><td><span class="token-swatch" style="background: var(--light);"></span></td><td class="token-name">bg-light</td><td class="token-class">Payment icons use bg-light text-dark — both invert via tokens</td></tr>
+    </table>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     PAGE-SURFACE COMPONENTS (bg, bg-surface, bg-surface-elevated)
+     ═══════════════════════════════════════════════════════════ -->
+<div id="adapts"></div>
+
+<!-- ─── 6. NAVIGATION BAR ──────────────────────── -->
+<div class="ref-section">
+  <div class="ref-section__header">
+    <h2>NavigationBar</h2>
+    <span class="badge-adapts">Adapts</span>
+  </div>
+  <div class="ref-section__meta">
+    sections/site-header/navigation-bar/NavigationBar.svelte
+  </div>
+  <div class="ref-section__body">
+    <div class="c-nav" style="border-radius: 10px;">
+      <div class="c-nav__inner">
+        <div class="c-nav__logo">Attwell<br>Farm<br>Park</div>
+        <div class="c-nav__actions">
+          <button class="c-nav__btn">Book Online</button>
+          <button class="c-nav__menu"><i class="bi bi-list"></i></button>
+        </div>
+      </div>
+    </div>
+    <table class="token-table" style="margin-top: 0.75rem;">
+      <tr><td><span class="token-swatch" style="background: var(--bg-surface-elevated);"></span></td><td class="token-name">bg-surface-elevated</td><td class="token-class">Nav sits on elevated surface — adapts to dark mode</td></tr>
+      <tr><td><span class="token-swatch" style="background: var(--primary);"></span></td><td class="token-name">border-primary</td><td class="token-class">Top border uses primary green — shifts lighter in dark mode</td></tr>
+      <tr><td><span class="token-swatch" style="background: var(--bg-surface-highest);"></span></td><td class="token-name">bg-surface-highest</td><td class="token-class">Menu button uses highest surface tier</td></tr>
+      <tr><td><span class="token-swatch" style="background: var(--primary);"></span></td><td class="token-name">btn bg-primary</td><td class="token-class">"Book Online" button — primary bg + btn-text</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- ─── 7. PAGE HEADER ──────────────────────── -->
+<div class="ref-section">
+  <div class="ref-section__header">
+    <h2>PageHeader</h2>
+    <span class="badge-adapts">Adapts</span>
+  </div>
+  <div class="ref-section__meta">
+    sections/page-header/PageHeader.svelte — bg-blue with clouds SVG, or bg-image with gradient overlay
+  </div>
+  <div class="ref-section__body">
+    <div class="grid-2">
+      <!-- Without image (clouds) -->
+      <div>
+        <div style="font-size: 0.75rem; color: var(--text-secondary); margin-bottom: 0.5rem; font-weight: 600; transition: color 0.3s;">Without image (bg-blue + clouds)</div>
+        <div class="c-page-header" style="border-radius: 12px;">
+          <div class="c-page-header__clouds"></div>
+          <div class="c-page-header__content">
+            <h1>Plan Your Visit</h1>
+            <p>Everything you need to know before you arrive</p>
+            <div style="margin-top: 0.75rem; display: flex; gap: 0.4rem; justify-content: center;">
+              <span class="c-badge" style="background: var(--tertiary-100); color: var(--tertiary-700); box-shadow: none;">Parking</span>
+              <span class="c-badge" style="background: var(--tertiary-100); color: var(--tertiary-700); box-shadow: none;">Accessible</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- With image -->
+      <div>
+        <div style="font-size: 0.75rem; color: var(--text-secondary); margin-bottom: 0.5rem; font-weight: 600; transition: color 0.3s;">With image (photo + gradient overlay)</div>
+        <div class="c-page-header c-page-header--image" style="border-radius: 12px; background-image: linear-gradient(135deg, oklch(40.05% 0.0477 162.18), oklch(54.13% 0.0798 279.07));">
+          <div class="c-page-header__overlay"></div>
+          <div class="c-page-header__content" style="padding-bottom: 1rem;">
+            <h1>Our Animals</h1>
+            <p>Meet our friendly farm animals and exotic species</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <table class="token-table" style="margin-top: 0.75rem;">
+      <tr><td><span class="token-swatch" style="background: var(--blue);"></span></td><td class="token-name">--blue (bg-blue)</td><td class="token-class">Light: oklch(90.68%) sky blue → Dark: oklch(44.54%) deep navy — same token</td></tr>
+      <tr><td></td><td class="token-name">clouds SVG</td><td class="token-class">cloudsBg('') — white clouds at low opacity, may need to dim further in dark</td></tr>
+      <tr><td></td><td class="token-name">photo overlay</td><td class="token-class">from-black/90 via-black/60 → darkens to from-black/92 via-black/70 in dark</td></tr>
+      <tr><td><span class="token-swatch" style="background: var(--tertiary-100);"></span></td><td class="token-name">badges</td><td class="token-class">tertiary-light — shifts via --tertiary-100 and --tertiary-700 tokens</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- ─── 8. HERO SLIDER ──────────────────────── -->
+<div class="ref-section">
+  <div class="ref-section__header">
+    <h2>HeroSlider</h2>
+    <span class="badge-photo">Photo-based</span>
+  </div>
+  <div class="ref-section__meta">
+    sections/hero-slider/HeroSlider.svelte — already has bg-black opacity-50 overlay
+  </div>
+  <div class="ref-section__body">
+    <div class="c-hero" style="border-radius: 12px;">
+      <div class="c-hero__overlay"></div>
+      <div class="c-hero__content">
+        <h1>Welcome to Attwell Farm Park</h1>
+        <p>Fun for all the family — Over 20 attractions, amazing animals and delicious food</p>
+        <button class="c-hero__btn">Plan Your Visit <i class="bi bi-arrow-right"></i></button>
+      </div>
+    </div>
+    <table class="token-table" style="margin-top: 0.75rem;">
+      <tr><td></td><td class="token-name">overlay</td><td class="token-class">bg-black opacity-50 → increases to opacity-70 in dark mode (CSS override)</td></tr>
+      <tr><td><span class="token-swatch" style="background: var(--secondary);"></span></td><td class="token-name">CTA btn</td><td class="token-class">bg-secondary text-dark — shifts via same shared tokens</td></tr>
+      <tr><td></td><td class="token-name">approach</td><td class="token-class">Don't alter the photo — deepen the overlay to create moodier feel</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- ─── 8. IMMERSIVE CARDS ──────────────────────── -->
+<div class="ref-section">
+  <div class="ref-section__header">
+    <h2>ImmersiveCard</h2>
+    <span class="badge-photo">Photo-based</span>
+  </div>
+  <div class="ref-section__meta">
+    partials/cards/ImmersiveCard.svelte
+  </div>
+  <div class="ref-section__body">
+    <div class="grid-3">
+      <div class="c-immersive">
+        <div class="c-immersive__img"><i class="bi bi-image"></i></div>
+        <div class="c-immersive__badges">
+          <span class="c-badge" style="background: var(--primary); color: white; box-shadow: none;">Attractions</span>
+          <span class="c-badge" style="background: var(--secondary); color: var(--dark); box-shadow: none;">Outdoor</span>
+        </div>
+        <div class="c-immersive__overlay">
+          <h3>Giant Jumping Pillow</h3>
+          <p>Bounce away on our giant outdoor jumping pillow — one of our most popular attractions!</p>
+        </div>
+      </div>
+      <div class="c-immersive">
+        <div class="c-immersive__img" style="background: linear-gradient(135deg, oklch(82.68% 0.1195 90.31), oklch(71.46% 0.1369 86.68));"><i class="bi bi-image"></i></div>
+        <div class="c-immersive__badges">
+          <span class="c-badge" style="background: var(--primary); color: white; box-shadow: none;">Animals</span>
+          <span class="c-badge" style="background: var(--secondary); color: var(--dark); box-shadow: none;">Indoor</span>
+        </div>
+        <div class="c-immersive__overlay">
+          <h3>Petting Barn</h3>
+          <p>Get up close with our friendly goats, rabbits and guinea pigs.</p>
+        </div>
+      </div>
+      <div class="c-immersive">
+        <div class="c-immersive__img" style="background: linear-gradient(135deg, var(--tertiary), var(--blue));"><i class="bi bi-image"></i></div>
+        <div class="c-immersive__badges">
+          <span class="c-badge" style="background: var(--primary); color: white; box-shadow: none;">Play</span>
+          <span class="c-badge" style="background: var(--secondary); color: var(--dark); box-shadow: none;">Indoor</span>
+        </div>
+        <div class="c-immersive__overlay">
+          <h3>Indoor Soft Play</h3>
+          <p>Three exciting zones for children of all ages. Suitable for ages 0–12.</p>
+        </div>
+      </div>
+    </div>
+    <table class="token-table" style="margin-top: 0.75rem;">
+      <tr><td></td><td class="token-name">image</td><td class="token-class">Full photo — unaffected, but could add slight darkening filter</td></tr>
+      <tr><td><span class="token-swatch" style="background: oklch(49.53% 0.0615 161.78);"></span></td><td class="token-name">overlay</td><td class="token-class">from-primary-600/90 — could deepen to primary-800/95 in dark mode</td></tr>
+      <tr><td></td><td class="token-name">badges</td><td class="token-class">bg-primary + bg-secondary — shift via global token like everything else</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- ─── 9. ACTIVITY CARD ──────────────────────── -->
+<div class="ref-section">
+  <div class="ref-section__header">
+    <h2>ActivityCard</h2>
+    <span class="badge-adapts">Adapts</span>
+  </div>
+  <div class="ref-section__meta">
+    partials/cards/ActivityCard.svelte — also: app.css .activity-card { @apply bg-yellow-50 }
+  </div>
+  <div class="ref-section__body">
+    <div class="stack max-md">
+      <div class="c-activity">
+        <div class="c-activity__img" style="background: linear-gradient(135deg, var(--primary), var(--tertiary));"><i class="bi bi-star-fill"></i></div>
+        <div class="c-activity__body">
+          <div class="c-activity__header">
+            <div>
+              <div class="c-activity__title">Sheep Racing</div>
+              <div class="c-activity__time">11:00 – 11:30</div>
+            </div>
+            <span class="c-activity__badge">Included</span>
+          </div>
+          <div class="c-activity__desc">Cheer on your favourite woolly racer in our hilarious sheep derby!</div>
+        </div>
+      </div>
+      <div class="c-activity">
+        <div class="c-activity__img" style="background: linear-gradient(135deg, var(--secondary), oklch(71.46% 0.1369 86.68));"><i class="bi bi-heart-fill"></i></div>
+        <div class="c-activity__body">
+          <div class="c-activity__header">
+            <div>
+              <div class="c-activity__title">Petting Barn Session</div>
+              <div class="c-activity__time">14:00 – 14:45</div>
+            </div>
+            <span class="c-activity__badge">Included</span>
+          </div>
+          <div class="c-activity__desc">Get hands-on with our friendly goats, rabbits and guinea pigs.</div>
+        </div>
+      </div>
+    </div>
+    <table class="token-table" style="margin-top: 0.75rem;">
+      <tr><td><span class="token-swatch" style="background: var(--secondary-50);"></span></td><td class="token-name">bg-yellow-50</td><td class="token-class">app.css hardcodes .activity-card { bg-yellow-50 } — needs dark mapping via --secondary-50</td></tr>
+      <tr><td><span class="token-swatch" style="background: var(--blue-100);"></span></td><td class="token-name">badge info-light</td><td class="token-class">colorMap['info-light'] → bg-blue-100 text-blue-700 — needs dark variant</td></tr>
+      <tr><td></td><td class="token-name">text-dark/40</td><td class="token-class">Time text at 40% opacity of dark — may need dark mode override</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- ─── 10. CALENDAR CARD ──────────────────────── -->
+<div class="ref-section">
+  <div class="ref-section__header">
+    <h2>CalendarCard</h2>
+    <span class="badge-adapts">Adapts</span>
+  </div>
+  <div class="ref-section__meta">
+    partials/cards/CalendarCard.svelte — also: app.css .calendar-card { @apply bg-yellow-50 }
+  </div>
+  <div class="ref-section__body">
+    <div class="grid-2">
+      <div class="c-calendar">
+        <div class="c-calendar__img" style="background: linear-gradient(135deg, var(--primary), var(--tertiary));"><i class="bi bi-calendar-event"></i></div>
+        <div class="c-calendar__body">
+          <div>
+            <span class="c-badge" style="background: var(--red-100); color: var(--red-700); box-shadow: none;">Special Event</span>
+          </div>
+          <div class="c-calendar__title">Easter Egg Hunt</div>
+          <p style="font-size: 0.85rem; color: var(--text-secondary); transition: color 0.3s;">Join us for a magical egg-finding adventure across the farm park!</p>
+          <div class="c-calendar__row">
+            <span class="c-calendar__label">Dates:</span>
+            <div class="c-calendar__badges">
+              <span class="c-badge" style="background: var(--tertiary-100); color: var(--tertiary-700); box-shadow: none;">29th Mar – 13th Apr</span>
+            </div>
+            <hr class="c-calendar__sep">
+            <span class="c-calendar__label">Times:</span>
+            <div class="c-calendar__badges">
+              <span class="c-badge" style="background: var(--secondary-100); color: var(--secondary-700); box-shadow: none;">10am – 4pm</span>
+            </div>
+            <hr class="c-calendar__sep">
+            <span class="c-calendar__label">Prices:</span>
+            <div class="c-calendar__badges">
+              <span class="c-badge" style="background: var(--primary-100); color: var(--primary-700); box-shadow: none;">Adult £14.95</span>
+              <span class="c-badge" style="background: var(--primary-100); color: var(--primary-700); box-shadow: none;">Child £12.95</span>
+            </div>
+          </div>
+          <div class="c-calendar__actions">
+            <span><i class="bi bi-calendar-plus"></i> Add to Calendar</span>
+            <span>Book Online <i class="bi bi-arrow-right"></i></span>
+          </div>
+        </div>
+      </div>
+      <div>
+        <table class="token-table">
+          <tr><td><span class="token-swatch" style="background: var(--secondary-50);"></span></td><td class="token-name">bg-yellow-50</td><td class="token-class">.calendar-card in app.css — same issue as ActivityCard</td></tr>
+          <tr><td><span class="token-swatch" style="background: var(--red-100);"></span></td><td class="token-name">danger-light</td><td class="token-class">Badge → bg-red-100 text-red-700</td></tr>
+          <tr><td><span class="token-swatch" style="background: var(--tertiary-100);"></span></td><td class="token-name">tertiary-light</td><td class="token-class">Date badges → bg-tertiary-100 text-tertiary-700</td></tr>
+          <tr><td><span class="token-swatch" style="background: var(--secondary-100);"></span></td><td class="token-name">secondary-light</td><td class="token-class">Time badges → bg-secondary-100 text-secondary-700</td></tr>
+          <tr><td><span class="token-swatch" style="background: var(--primary-100);"></span></td><td class="token-name">primary-light</td><td class="token-class">Price badges → bg-primary-100 text-primary-700</td></tr>
+          <tr><td></td><td class="token-name">border</td><td class="token-class">border-gray-300/20 separators — needs subtle dark variant</td></tr>
+          <tr><td><span class="token-swatch" style="background: var(--primary);"></span></td><td class="token-name">text-primary</td><td class="token-class">Action links — "Add to Calendar", "Book Online"</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── 11. TESTIMONIAL CARD ──────────────────────── -->
+<div class="ref-section">
+  <div class="ref-section__header">
+    <h2>TestimonialCard</h2>
+    <span class="badge-adapts">Adapts</span>
+  </div>
+  <div class="ref-section__meta">
+    partials/cards/TestimonialCard.svelte
+  </div>
+  <div class="ref-section__body">
+    <div class="grid-3">
+      <div class="c-testimonial">
+        <div class="c-testimonial__header">
+          <span class="c-testimonial__name">Sarah W. <i class="bi bi-check-circle-fill" style="color: var(--primary); font-size: 0.8rem;"></i></span>
+          <span class="c-testimonial__stars"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></span>
+        </div>
+        <p>Absolutely brilliant day out! The kids loved every minute. The petting barn was their highlight.</p>
+      </div>
+      <div class="c-testimonial">
+        <div class="c-testimonial__header">
+          <span class="c-testimonial__name">Mark T. <i class="bi bi-check-circle-fill" style="color: var(--primary); font-size: 0.8rem;"></i></span>
+          <span class="c-testimonial__stars"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></span>
+        </div>
+        <p>Great value for money. We'll definitely be back. The staff were so friendly and helpful.</p>
+      </div>
+      <div class="c-testimonial">
+        <div class="c-testimonial__header">
+          <span class="c-testimonial__name">Emma R. <i class="bi bi-check-circle-fill" style="color: var(--primary); font-size: 0.8rem;"></i></span>
+          <span class="c-testimonial__stars"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></span>
+        </div>
+        <p>Perfect rainy day activity — the indoor play areas are fantastic. Loved the food too!</p>
+      </div>
+    </div>
+    <table class="token-table" style="margin-top: 0.75rem;">
+      <tr><td><span class="token-swatch" style="background: var(--bg-surface);"></span></td><td class="token-name">bg-light</td><td class="token-class">Hardcoded bg-light — needs to map to --bg-surface in dark mode</td></tr>
+      <tr><td><span class="token-swatch" style="background: var(--primary);"></span></td><td class="token-name">border-primary</td><td class="token-class">border-2 border-primary — adapts via token shift</td></tr>
+      <tr><td><span class="token-swatch" style="background: #efbf04;"></span></td><td class="token-name">#efbf04</td><td class="token-class">Stars hardcoded gold — fine in both modes</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- ─── 12. SUMMARY CARD ──────────────────────── -->
+<div class="ref-section">
+  <div class="ref-section__header">
+    <h2>SummaryCard</h2>
+    <span class="badge-adapts">Adapts</span>
+  </div>
+  <div class="ref-section__meta">
+    partials/cards/SummaryCard.svelte
+  </div>
+  <div class="ref-section__body">
+    <div class="grid-2">
+      <div class="c-summary">
+        <div class="c-summary__img" style="background: linear-gradient(135deg, var(--primary), var(--tertiary));"><i class="bi bi-image"></i></div>
+        <div class="c-summary__body">
+          <div class="c-summary__title">Outdoor Adventure Zone</div>
+          <p style="font-size: 0.85rem; color: var(--text-secondary); transition: color 0.3s;">Explore our exciting outdoor play area with climbing frames, slides and more.</p>
+          <ul class="c-summary__checklist">
+            <li><i class="bi bi-check-circle-fill"></i> Suitable for all ages</li>
+            <li><i class="bi bi-check-circle-fill"></i> Weather permitting</li>
+            <li><i class="bi bi-check-circle-fill"></i> Included with admission</li>
+          </ul>
+          <div class="row" style="margin-top: 0.25rem;">
+            <span class="c-badge" style="background: var(--primary-100); color: var(--primary-700); box-shadow: none;">Outdoor</span>
+            <span class="c-badge" style="background: var(--secondary-100); color: var(--secondary-700); box-shadow: none;">All Ages</span>
+          </div>
+        </div>
+      </div>
+      <div class="c-summary">
+        <div style="padding: 1.25rem; display: flex; flex-direction: column; gap: 0.75rem;">
+          <div style="display: flex; align-items: center; gap: 0.75rem;">
+            <div class="c-summary__icon" style="background: var(--primary-100); color: var(--primary-700); transition: all 0.3s;"><i class="bi bi-geo-alt-fill"></i></div>
+            <div>
+              <div class="c-summary__title">Getting Here</div>
+              <p style="font-size: 0.85rem; color: var(--text-secondary); transition: color 0.3s;">Just off the A38, easy access from M5 & M42</p>
+            </div>
+          </div>
+          <ul class="c-summary__checklist">
+            <li><i class="bi bi-check-circle-fill"></i> Free parking</li>
+            <li><i class="bi bi-check-circle-fill"></i> Accessible entrance</li>
+            <li><i class="bi bi-check-circle-fill"></i> Coach parking available</li>
+          </ul>
+          <div style="padding: 0.75rem; border-radius: 8px; background: var(--primary-100); color: var(--primary-700); font-size: 0.8rem; transition: all 0.3s;">
+            <strong>Hint:</strong> Book online to skip the queue at reception!
+          </div>
+        </div>
+      </div>
+    </div>
+    <table class="token-table" style="margin-top: 0.75rem;">
+      <tr><td><span class="token-swatch" style="background: var(--bg-surface);"></span></td><td class="token-name">bg-surface</td><td class="token-class">border border-gray-200 shadow — needs dark border + surface swap</td></tr>
+      <tr><td><span class="token-swatch" style="background: var(--primary-100);"></span></td><td class="token-name">icon circle</td><td class="token-class">colorMap bg — adapts via token, but -100 needs dark mapping</td></tr>
+      <tr><td></td><td class="token-name">hint box</td><td class="token-class">Uses colorMap for bg — same concern as badges</td></tr>
+      <tr><td></td><td class="token-name">border-gray-200</td><td class="token-class">Hardcoded gray border — needs dark override</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- ─── 13. FAQ / ACCORDION ──────────────────────── -->
+<div class="ref-section">
+  <div class="ref-section__header">
+    <h2>FAQ / SingleFaq</h2>
+    <span class="badge-adapts">Adapts</span>
+  </div>
+  <div class="ref-section__meta">
+    sections/faqs/SingleFaq.svelte — Two variants: default (yellow border) &amp; showcase (purple bg)
+  </div>
+  <div class="ref-section__body">
+    <div class="grid-2">
+      <div class="stack">
+        <h4 class="font-heading" style="font-size: 1rem; color: var(--text-secondary); transition: color 0.3s;">Default variant</h4>
+        <div class="c-faq">
+          <div class="c-faq__summary">
+            What are your opening hours?
+            <i class="bi bi-chevron-right" style="color: var(--primary); transition: color 0.3s;"></i>
+          </div>
+          <div class="c-faq__answer">We're open daily from 10am to 5pm during term time, and 10am to 6pm during school holidays.</div>
+        </div>
+        <div class="c-faq">
+          <div class="c-faq__summary">
+            Can I bring my own food?
+            <i class="bi bi-chevron-right" style="color: var(--primary); transition: color 0.3s;"></i>
+          </div>
+        </div>
+      </div>
+      <div class="stack">
+        <h4 class="font-heading" style="font-size: 1rem; color: var(--text-secondary); transition: color 0.3s;">Showcase variant (on bg-tertiary)</h4>
+        <div class="c-faq c-faq--showcase">
+          <div class="c-faq__summary">
+            Is the park accessible?
+            <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.3); width: 100%; margin: 0.25rem 0;">
+            <span class="c-faq__answer" style="padding: 0;">Yes! We have wheelchair-accessible paths, accessible toilets, and a Changing Places facility.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <table class="token-table" style="margin-top: 0.75rem;">
+      <tr><td><span class="token-swatch" style="background: var(--secondary);"></span></td><td class="token-name">border-secondary</td><td class="token-class">Default: border-2 border-secondary bg-yellow-50 — needs dark variant</td></tr>
+      <tr><td><span class="token-swatch" style="background: var(--bg-surface);"></span></td><td class="token-name">bg-white</td><td class="token-class">Summary header hardcoded bg-white — map to --bg-surface</td></tr>
+      <tr><td><span class="token-swatch" style="background: var(--tertiary);"></span></td><td class="token-name">bg-tertiary</td><td class="token-class">Showcase: bg-tertiary text-light — exempt (strong brand bg)</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- ─── 14. ALERTS ──────────────────────── -->
+<div class="ref-section">
+  <div class="ref-section__header">
+    <h2>Alert</h2>
+    <span class="badge-adapts">Adapts</span>
+  </div>
+  <div class="ref-section__meta">
+    partials/alert/Alert.svelte — uses colorMap for bg+text
+  </div>
+  <div class="ref-section__body">
+    <div class="stack max-md">
+      <div class="c-alert" style="border-color: var(--primary); background: oklch(from var(--primary) l c h / 0.12);">
+        <i class="bi bi-check-circle" style="color: var(--primary); margin-right: 0.3rem;"></i>
+        Your booking has been confirmed. Check your email for details.
+      </div>
+      <div class="c-alert" style="border-color: var(--secondary); background: oklch(from var(--secondary) l c h / 0.12);">
+        <i class="bi bi-exclamation-triangle" style="color: var(--secondary); margin-right: 0.3rem;"></i>
+        Limited availability — only a few slots remaining for this date.
+      </div>
+      <div class="c-alert" style="border-color: var(--blue); background: oklch(from var(--blue) l c h / 0.12);">
+        <i class="bi bi-info-circle" style="color: var(--blue); margin-right: 0.3rem;"></i>
+        The farm park is open daily from 10am to 5pm during half term.
+      </div>
+      <div class="c-alert" style="border-color: var(--red-500); background: oklch(from var(--red-500) l c h / 0.12);">
+        <i class="bi bi-x-circle" style="color: var(--red-500); margin-right: 0.3rem;"></i>
+        Payment failed. Please check your card details and try again.
+      </div>
+    </div>
+    <table class="token-table" style="margin-top: 0.75rem;">
+      <tr><td></td><td class="token-name">colorMap</td><td class="token-class">Uses colorMap for light-variant backgrounds (e.g. primary-light, info-light)</td></tr>
+      <tr><td></td><td class="token-name">border-l-2</td><td class="token-class">Left border accent — colour from colorMap key</td></tr>
+      <tr><td></td><td class="token-name">concern</td><td class="token-class">Light-variant bg colours (bg-*-100) need dark mode mapping</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- ─── 15. BUTTONS ──────────────────────── -->
+<div class="ref-section">
+  <div class="ref-section__header">
+    <h2>Button</h2>
+    <span class="badge-adapts">Adapts</span>
+  </div>
+  <div class="ref-section__meta">
+    ui/Button.svelte — Variants: filled, outline, underline, icon
+  </div>
+  <div class="ref-section__body">
+    <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+      <div class="row">
+        <span style="font-size: 0.7rem; width: 4rem; color: var(--text-secondary); transition: color 0.3s;">Filled</span>
+        <button class="c-btn" style="background: var(--primary); color: var(--btn-text);">Book Online</button>
+        <button class="c-btn" style="background: var(--secondary); color: var(--dark);">Become a Member</button>
+        <button class="c-btn" style="background: var(--tertiary); color: var(--btn-text);">Explore</button>
+        <button class="c-btn" style="background: var(--christmas-500); color: white;">Christmas</button>
+      </div>
+      <div class="row">
+        <span style="font-size: 0.7rem; width: 4rem; color: var(--text-secondary); transition: color 0.3s;">Outline</span>
+        <button class="c-btn" style="background: transparent; outline: 2px solid var(--primary); color: var(--primary); transition: all 0.3s;">View Prices</button>
+        <button class="c-btn" style="background: transparent; outline: 2px solid var(--secondary); color: var(--secondary); transition: all 0.3s;">What's On</button>
+      </div>
+      <div class="row">
+        <span style="font-size: 0.7rem; width: 4rem; color: var(--text-secondary); transition: color 0.3s;">Underline</span>
+        <button class="c-btn" style="background: transparent; border-bottom: 2px solid var(--primary); color: var(--primary); border-radius: 0; padding: 0.25rem 0; transition: all 0.3s;">Learn More</button>
+      </div>
+    </div>
+    <table class="token-table" style="margin-top: 0.75rem;">
+      <tr><td><span class="token-swatch" style="background: var(--primary);"></span></td><td class="token-name">filled</td><td class="token-class">colorMap[key] → bg-{color} text-{contrast}</td></tr>
+      <tr><td></td><td class="token-name">outline</td><td class="token-class">textColorMap[key] → text-{color} + outline-2</td></tr>
+      <tr><td></td><td class="token-name">btn-text</td><td class="token-class">Dark mode inverts: white → dark for readability on lighter accents</td></tr>
+      <tr><td></td><td class="token-name">focus ring</td><td class="token-class">focus:ring-primary — adapts via token</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- ─── 16. BADGES ──────────────────────── -->
+<div class="ref-section">
+  <div class="ref-section__header">
+    <h2>Badge</h2>
+    <span class="badge-adapts">Adapts</span>
+  </div>
+  <div class="ref-section__meta">
+    ui/Badge.svelte — rounded-full ring-1, uses colorMap
+  </div>
+  <div class="ref-section__body">
+    <div class="row" style="gap: 0.5rem;">
+      <span class="c-badge" style="background: var(--primary); color: white; box-shadow: none;">Primary</span>
+      <span class="c-badge" style="background: var(--secondary); color: var(--dark); box-shadow: none;">Secondary</span>
+      <span class="c-badge" style="background: var(--tertiary); color: white; box-shadow: none;">Tertiary</span>
+      <span class="c-badge" style="background: var(--primary-100); color: var(--primary-700); box-shadow: none;">Primary Light</span>
+      <span class="c-badge" style="background: var(--secondary-100); color: var(--secondary-700); box-shadow: none;">Secondary Light</span>
+      <span class="c-badge" style="background: var(--tertiary-100); color: var(--tertiary-700); box-shadow: none;">Tertiary Light</span>
+      <span class="c-badge" style="background: var(--blue-100); color: var(--blue-700); box-shadow: none;">Info Light</span>
+      <span class="c-badge" style="background: var(--red-100); color: var(--red-700); box-shadow: none;">Danger Light</span>
+    </div>
+    <table class="token-table" style="margin-top: 0.75rem;">
+      <tr><td></td><td class="token-name">full variants</td><td class="token-class">bg-{color} text-{contrast} — work well if accent tokens shift</td></tr>
+      <tr><td></td><td class="token-name">light variants</td><td class="token-class">bg-{color}-100 text-{color}-700 — these need inverted mapping in dark</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- ─── 17. FORM / INPUTS ──────────────────────── -->
+<div class="ref-section">
+  <div class="ref-section__header">
+    <h2>Form / Input / Select</h2>
+    <span class="badge-adapts">Adapts</span>
+  </div>
+  <div class="ref-section__meta">
+    ui/Input.svelte + partials/fields/ — bg-white/50 hardcoded
+  </div>
+  <div class="ref-section__body">
+    <div class="c-form max-sm">
+      <label>Full Name</label>
+      <input type="text" placeholder="Enter your name">
+      <label>Email Address</label>
+      <input type="email" placeholder="you@example.com">
+      <label>Number of Tickets</label>
+      <select><option>1 Adult</option><option>2 Adults</option><option>Family (2+2)</option></select>
+      <button class="c-btn" style="background: var(--primary); color: var(--btn-text); width: 100%; justify-content: center; transition: all 0.3s;">Book Now</button>
+    </div>
+    <table class="token-table" style="margin-top: 0.75rem;">
+      <tr><td><span class="token-swatch" style="background: var(--bg-surface-elevated);"></span></td><td class="token-name">input bg</td><td class="token-class">Input.svelte uses bg-white/50 — needs --bg-surface-elevated</td></tr>
+      <tr><td><span class="token-swatch" style="background: var(--border-subtle);"></span></td><td class="token-name">border</td><td class="token-class">border + rounded-lg — adapts via --border-subtle</td></tr>
+      <tr><td></td><td class="token-name">focus ring</td><td class="token-class">focus:ring-primary/20 — adapts via token</td></tr>
+      <tr><td></td><td class="token-name">helper text</td><td class="token-class">text-gray-600 hardcoded — needs dark mapping</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- ─── 18. DIALOG ──────────────────────── -->
+<div class="ref-section">
+  <div class="ref-section__header">
+    <h2>Dialog</h2>
+    <span class="badge-adapts">Adapts</span>
+  </div>
+  <div class="ref-section__meta">
+    ui/Dialog.svelte — bg-white hardcoded, backdrop bg-black/50
+  </div>
+  <div class="ref-section__body">
+    <div class="c-dialog">
+      <div class="c-dialog__header">
+        <span class="c-dialog__title">Select Date & Time</span>
+        <button class="c-dialog__close"><i class="bi bi-x-lg"></i></button>
+      </div>
+      <div class="c-dialog__desc">Choose your preferred visit date and arrival time slot.</div>
+      <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+        <label style="font-family: 'Patrick Hand', cursive; font-size: 0.95rem;">Visit Date</label>
+        <input style="padding: 0.4rem 0.6rem; border: 1px solid var(--border-subtle); border-radius: 6px; background: var(--bg-surface-elevated); color: var(--text-primary); font-size: 0.85rem; transition: all 0.3s;" type="date">
+        <button class="c-btn" style="background: var(--primary); color: var(--btn-text); justify-content: center; margin-top: 0.5rem; transition: all 0.3s;">Confirm</button>
+      </div>
+    </div>
+    <table class="token-table" style="margin-top: 0.75rem;">
+      <tr><td><span class="token-swatch" style="background: var(--bg-surface);"></span></td><td class="token-name">bg-white</td><td class="token-class">Hardcoded bg-white p-0 shadow-lg — needs --bg-surface</td></tr>
+      <tr><td></td><td class="token-name">text-gray-500</td><td class="token-class">Description text hardcoded gray — needs dark mapping</td></tr>
+      <tr><td></td><td class="token-name">backdrop</td><td class="token-class">bg-black/50 backdrop-blur — works in both modes</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- ─── 19. COOKIE CONSENT ──────────────────────── -->
+<div class="ref-section">
+  <div class="ref-section__header">
+    <h2>Cookie Consent</h2>
+    <span class="badge-adapts">Adapts</span>
+  </div>
+  <div class="ref-section__meta">
+    sections/cookie-consent/cookieConsent.svelte — already has dark: prefixes!
+  </div>
+  <div class="ref-section__body">
+    <div class="c-cookie" style="max-width: 700px;">
+      <div class="c-cookie__inner">
+        <p class="c-cookie__text">We use cookies for essential functions, analytics, and marketing. <a href="#" style="color: var(--blue); text-decoration: underline;">Click here to manage your preferences.</a></p>
+        <div class="c-cookie__actions">
+          <button class="c-cookie__reject">Reject all</button>
+          <button class="c-btn" style="background: var(--primary); color: var(--btn-text); transition: all 0.3s;">Accept all</button>
+        </div>
+      </div>
+    </div>
+    <table class="token-table" style="margin-top: 0.75rem;">
+      <tr><td></td><td class="token-name" style="color: oklch(65.63% 0.0821 162.32);">Already done!</td><td class="token-class">Uses dark:bg-neutral-900/95 dark:text-white dark:border-neutral-700</td></tr>
+      <tr><td></td><td class="token-name">modal</td><td class="token-class">Also has dark: variants — dark:bg-neutral-900, dark:text-gray-300</td></tr>
+      <tr><td></td><td class="token-name">note</td><td class="token-class">Uses Tailwind dark: prefix — will work with class-based toggle</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- ─── 20. CALL TO ACTION ──────────────────────── -->
+<div class="ref-section">
+  <div class="ref-section__header">
+    <h2>CallToAction</h2>
+    <span class="badge-adapts">Adapts</span>
+  </div>
+  <div class="ref-section__meta">
+    sections/call-to-action/CallToAction.svelte — bg from colorMap
+  </div>
+  <div class="ref-section__body">
+    <div class="grid-2">
+      <div class="c-cta" style="background: var(--primary); color: white;">
+        <div class="font-heading" style="font-size: 1.15rem;">Get In Touch</div>
+        <div class="c-cta__items">
+          <div class="c-cta__item" style="background: rgba(255,255,255,0.2); color: white;"><i class="bi bi-telephone"></i> 01234 567890</div>
+          <div class="c-cta__item" style="background: rgba(255,255,255,0.2); color: white;"><i class="bi bi-envelope"></i> hello@attwellfarmpark.co.uk</div>
+          <div class="c-cta__item" style="background: rgba(0,0,0,0.7); color: white;"><i class="bi bi-geo-alt"></i> Attwell Farm Park, Bromsgrove</div>
+        </div>
+      </div>
+      <div class="c-cta" style="background: var(--tertiary); color: white;">
+        <div class="font-heading" style="font-size: 1.15rem;">Plan Your Visit</div>
+        <p style="font-size: 0.85rem; opacity: 0.9; margin-top: 0.25rem;">Everything you need to know before you arrive.</p>
+        <div class="c-cta__items">
+          <div class="c-cta__item" style="background: rgba(255,255,255,0.2); color: white;"><i class="bi bi-clock"></i> Opening Hours</div>
+          <div class="c-cta__item" style="background: rgba(255,255,255,0.2); color: white;"><i class="bi bi-map"></i> Getting Here</div>
+        </div>
+      </div>
+    </div>
+    <table class="token-table" style="margin-top: 0.75rem;">
+      <tr><td></td><td class="token-name">bg</td><td class="token-class">colorMap[color.key] — shifts via token to deeper shade in dark mode</td></tr>
+      <tr><td></td><td class="token-name">light items</td><td class="token-class">bg-white/20 — translucent on brand bg, fine in both modes</td></tr>
+      <tr><td></td><td class="token-name">dark items</td><td class="token-class">bg-black text-white — hardcoded, works in both modes</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- ─── 21. PRICING TABLE ──────────────────────── -->
+<div class="ref-section">
+  <div class="ref-section__header">
+    <h2>PricingMatrix / Table</h2>
+    <span class="badge-adapts">Adapts</span>
+  </div>
+  <div class="ref-section__meta">
+    sections/pricing-matrix/PricingMatrix.svelte + sections/table/Table.svelte
+  </div>
+  <div class="ref-section__body">
+    <div class="max-md">
+      <table class="c-table" style="border-radius: 10px; overflow: hidden;">
+        <thead>
+          <tr><th>Ticket Type</th><th>Same Day</th><th>Advance (online)</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Adult</td><td>£16.95</td><td>£14.95</td></tr>
+          <tr><td>Child (2–15)</td><td>£14.95</td><td>£12.95</td></tr>
+          <tr><td>Under 2</td><td>Free</td><td>Free</td></tr>
+          <tr><td>Senior (65+)</td><td>£12.95</td><td>£10.95</td></tr>
+          <tr><td>Carer</td><td>Free</td><td>Free</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <table class="token-table" style="margin-top: 0.75rem;">
+      <tr><td><span class="token-swatch" style="background: var(--secondary);"></span></td><td class="token-name">thead</td><td class="token-class">bg-secondary — yellow header, dark text always</td></tr>
+      <tr><td><span class="token-swatch" style="background: var(--bg-surface-elevated);"></span></td><td class="token-name">striped rows</td><td class="token-class">Even rows use elevated surface — adapts via token</td></tr>
+      <tr><td><span class="token-swatch" style="background: var(--border-subtle);"></span></td><td class="token-name">td border</td><td class="token-class">border-bottom uses --border-subtle — adapts</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- ─── 22. TRAPEZOID HEADING ──────────────────────── -->
+<div class="ref-section">
+  <div class="ref-section__header">
+    <h2>Trapezoid (Intro heading)</h2>
+    <span class="badge-adapts">Adapts</span>
+  </div>
+  <div class="ref-section__meta">
+    ui/Trapezoid.svelte — SVG tails + coloured band behind heading text
+  </div>
+  <div class="ref-section__body">
+    <div class="stack">
+      <div class="c-trapezoid">
+        <div class="c-trapezoid__tail">
+          <svg viewBox="0 0 20 40" preserveAspectRatio="none"><polygon points="20,0 20,40 0,40" style="fill: var(--secondary);"/></svg>
+        </div>
+        <div class="c-trapezoid__body" style="background: var(--secondary); color: var(--dark); transition: all 0.3s;">Our Attractions</div>
+        <div class="c-trapezoid__tail">
+          <svg viewBox="0 0 20 40" preserveAspectRatio="none"><polygon points="0,0 20,0 0,40" style="fill: var(--secondary);"/></svg>
+        </div>
+      </div>
+      <div class="c-trapezoid">
+        <div class="c-trapezoid__tail">
+          <svg viewBox="0 0 20 40" preserveAspectRatio="none"><polygon points="20,0 20,40 0,40" style="fill: var(--primary);"/></svg>
+        </div>
+        <div class="c-trapezoid__body" style="background: var(--primary); color: white; transition: all 0.3s;">Plan Your Visit</div>
+        <div class="c-trapezoid__tail">
+          <svg viewBox="0 0 20 40" preserveAspectRatio="none"><polygon points="0,0 20,0 0,40" style="fill: var(--primary);"/></svg>
+        </div>
+      </div>
+      <div class="c-trapezoid">
+        <div class="c-trapezoid__tail">
+          <svg viewBox="0 0 20 40" preserveAspectRatio="none"><polygon points="20,0 20,40 0,40" style="fill: var(--tertiary);"/></svg>
+        </div>
+        <div class="c-trapezoid__body" style="background: var(--tertiary); color: white; transition: all 0.3s;">What's On</div>
+        <div class="c-trapezoid__tail">
+          <svg viewBox="0 0 20 40" preserveAspectRatio="none"><polygon points="0,0 20,0 0,40" style="fill: var(--tertiary);"/></svg>
+        </div>
+      </div>
+    </div>
+    <table class="token-table" style="margin-top: 0.75rem;">
+      <tr><td></td><td class="token-name">bg</td><td class="token-class">colorMap[key] for the band — adapts via token shift</td></tr>
+      <tr><td></td><td class="token-name">SVG fill</td><td class="token-class">textColorMap[key] for SVG tails — must match band colour</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- ─── 24. SEARCH ──────────────────────── -->
+<div class="ref-section">
+  <div class="ref-section__header">
+    <h2>Search</h2>
+    <span class="badge-adapts">Adapts</span>
+  </div>
+  <div class="ref-section__meta">
+    sections/search/Search.svelte
+  </div>
+  <div class="ref-section__body">
+    <div class="c-search">
+      <select><option>All</option><option>Attractions</option><option>Animals</option></select>
+      <input type="text" placeholder="Search...">
+      <button class="c-search__btn">Search</button>
+    </div>
+    <div style="font-size: 0.75rem; color: var(--text-secondary); margin-top: 0.5rem; transition: color 0.3s;">Showing 1 - 12 of 34</div>
+    <table class="token-table" style="margin-top: 0.75rem;">
+      <tr><td></td><td class="token-name">bg-white</td><td class="token-class">Hardcoded on select + input — needs --bg-surface</td></tr>
+      <tr><td></td><td class="token-name">border-gray-300</td><td class="token-class">Hardcoded border — needs --border-subtle</td></tr>
+      <tr><td><span class="token-swatch" style="background: var(--primary);"></span></td><td class="token-name">bg-primary</td><td class="token-class">Submit button — shifts via token</td></tr>
+      <tr><td></td><td class="token-name">text-gray-400</td><td class="token-class">Results count hardcoded — needs dark override</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- ─── 25. SLIM NAVIGATION ──────────────────────── -->
+<div class="ref-section">
+  <div class="ref-section__header">
+    <h2>SlimNavigation</h2>
+    <span class="badge-adapts">Adapts</span>
+  </div>
+  <div class="ref-section__meta">
+    sections/site-header/slim-navigation/SlimNavigation.svelte — used on checkout pages
+  </div>
+  <div class="ref-section__body">
+    <div class="c-slim-nav" style="border-radius: 10px;">
+      <div class="c-slim-nav__inner">
+        <span style="display: flex; align-items: center; gap: 0.3rem; font-family: 'Rum Raisin', sans-serif;"><i class="bi bi-arrow-left"></i> Back</span>
+        <span style="display: flex; align-items: center; gap: 0.3rem;"><i class="bi bi-shield-check"></i> Secure Checkout</span>
+      </div>
+    </div>
+    <table class="token-table" style="margin-top: 0.75rem;">
+      <tr><td><span class="token-swatch" style="background: var(--primary);"></span></td><td class="token-name">bg-primary</td><td class="token-class">Same token as info bar, footer — all shift together</td></tr>
+      <tr><td></td><td class="token-name">text-white</td><td class="token-class">Hardcoded text-white — should use text-light or --btn-text</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- ─── 26. BOOKING / CHECKOUT ──────────────────────── -->
+<div class="ref-section">
+  <div class="ref-section__header">
+    <h2>BookOnline / Checkout</h2>
+    <span class="badge-adapts">Adapts</span>
+  </div>
+  <div class="ref-section__meta">
+    sections/book-online/BookOnline.svelte + sections/checkout/Checkout.svelte
+  </div>
+  <div class="ref-section__body">
+    <div class="c-checkout">
+      <div class="c-checkout__panel">
+        <div class="font-heading" style="font-size: 1.1rem; margin-bottom: 0.75rem;">Your Details</div>
+        <label style="font-size: 0.8rem; display: block; margin-bottom: 0.15rem;">Full Name</label>
+        <input style="width: 100%; padding: 0.4rem 0.6rem; border: 1px solid var(--border-subtle); border-radius: 6px; background: var(--bg-surface-elevated); color: var(--text-primary); font-size: 0.85rem; margin-bottom: 0.5rem; transition: all 0.3s;">
+        <label style="font-size: 0.8rem; display: block; margin-bottom: 0.15rem;">Email</label>
+        <input style="width: 100%; padding: 0.4rem 0.6rem; border: 1px solid var(--border-subtle); border-radius: 6px; background: var(--bg-surface-elevated); color: var(--text-primary); font-size: 0.85rem; margin-bottom: 0.75rem; transition: all 0.3s;">
+        <button class="c-btn" style="background: var(--primary); color: var(--btn-text); width: 100%; justify-content: center; transition: all 0.3s;">Proceed to Payment</button>
+      </div>
+      <div class="c-checkout__summary">
+        <div class="font-heading" style="font-size: 1rem; margin-bottom: 0.5rem;">Order Summary</div>
+        <div class="c-checkout__row"><span>2x Adult</span><span>£29.90</span></div>
+        <div class="c-checkout__row"><span>1x Child</span><span>£12.95</span></div>
+        <hr style="border: 0; border-top: 1px solid var(--border-subtle); margin: 0.35rem 0; transition: border-color 0.3s;">
+        <div class="c-checkout__row" style="font-weight: 700;"><span>Total</span><span>£42.85</span></div>
+      </div>
+    </div>
+    <table class="token-table" style="margin-top: 0.75rem;">
+      <tr><td></td><td class="token-name">bg-white</td><td class="token-class">Checkout form uses hardcoded bg-white — needs --bg-surface</td></tr>
+      <tr><td></td><td class="token-name">border-dark</td><td class="token-class">border-dark on form sections — shifts via --dark token</td></tr>
+      <tr><td><span class="token-swatch" style="background: var(--primary);"></span></td><td class="token-name">bg-primary</td><td class="token-class">Submit button + bg-primary/50 disabled state</td></tr>
+      <tr><td></td><td class="token-name">bg-black/50</td><td class="token-class">Payment overlay — fine in both modes</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- ─── 27. CHECKOUT COMPLETE ──────────────────────── -->
+<div class="ref-section">
+  <div class="ref-section__header">
+    <h2>CheckoutComplete</h2>
+    <span class="badge-adapts">Adapts</span>
+  </div>
+  <div class="ref-section__meta">
+    sections/checkout-complete/CheckoutComplete.svelte — uses colorMap ultra-light variants
+  </div>
+  <div class="ref-section__body">
+    <div class="stack" style="gap: 1rem;">
+      <div class="c-checkout-complete__section" style="background: var(--primary-50); color: var(--primary-700); text-align: center;">
+        <div style="font-size: 2rem; margin-bottom: 0.5rem;"><i class="bi bi-check-circle"></i></div>
+        <div class="font-heading" style="font-size: 1.3rem; color: var(--text-primary); transition: color 0.3s;">Thank you for your order!</div>
+        <div style="font-size: 0.8rem; margin-top: 0.5rem; color: var(--text-secondary); transition: color 0.3s;">Order Reference: <strong>AFP-12345</strong></div>
+      </div>
+      <div class="grid-2" style="gap: 1rem;">
+        <div class="c-checkout-complete__section" style="background: var(--tertiary-50); color: var(--tertiary-700);">
+          <div class="font-heading" style="font-size: 1rem;">Order Summary</div>
+          <div style="font-size: 0.8rem; margin-top: 0.5rem;">2x Adult — £29.90<br>1x Child — £12.95<br><strong>Total: £42.85</strong></div>
+        </div>
+        <div class="c-checkout-complete__section" style="background: var(--secondary-50); color: var(--secondary-700);">
+          <div class="font-heading" style="font-size: 1rem;">Payment Information</div>
+          <div style="font-size: 0.8rem; margin-top: 0.5rem;">Visa ending in 4242<br><span style="color: var(--primary);">Payment Successful</span></div>
+        </div>
+      </div>
+    </div>
+    <table class="token-table" style="margin-top: 0.75rem;">
+      <tr><td><span class="token-swatch" style="background: var(--primary-50);"></span></td><td class="token-name">primary-ultra-light</td><td class="token-class">colorMap['primary-ultra-light'] → bg-primary-50 text-primary-700</td></tr>
+      <tr><td><span class="token-swatch" style="background: var(--tertiary-50);"></span></td><td class="token-name">tertiary-ultra-light</td><td class="token-class">colorMap['tertiary-ultra-light'] → bg-tertiary-50 text-tertiary-700</td></tr>
+      <tr><td><span class="token-swatch" style="background: var(--secondary-50);"></span></td><td class="token-name">secondary-ultra-light</td><td class="token-class">colorMap['secondary-ultra-light'] → bg-secondary-50 text-secondary-700</td></tr>
+      <tr><td></td><td class="token-name">bg-white</td><td class="token-class">Loading overlay hardcoded bg-white — needs --bg-surface</td></tr>
+      <tr><td></td><td class="token-name">text-gray-500</td><td class="token-class">Label text hardcoded gray — needs dark override</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- ─── 28. SEASONAL FEATURE ──────────────────────── -->
+<div class="ref-section">
+  <div class="ref-section__header">
+    <h2>SeasonalFeature</h2>
+    <span class="badge-adapts">Adapts</span>
+  </div>
+  <div class="ref-section__meta">
+    sections/seasonal-feature/SeasonalFeature.svelte — hardcoded gradient!
+  </div>
+  <div class="ref-section__body">
+    <div class="c-seasonal c-seasonal--gradient" style="background: linear-gradient(135deg, #FFE5F0, #B4E9D6);">
+      <div class="c-seasonal__img" style="background: linear-gradient(135deg, var(--primary), var(--tertiary));"><i class="bi bi-image"></i></div>
+      <div class="c-seasonal__body">
+        <span class="c-badge" style="background: var(--primary); color: white; box-shadow: none;">Animals</span>
+        <div class="font-heading" style="font-size: 1.3rem;">Meet the Meerkats</div>
+        <p style="font-size: 0.85rem; color: var(--text-secondary); transition: color 0.3s;">Our playful meerkat family love to entertain visitors with their antics.</p>
+        <div class="c-seasonal__grid">
+          <div class="c-seasonal__attr" style="background: rgba(255,255,255,0.4);"><i class="bi bi-geo-alt" style="color: var(--primary);"></i> Safari Zone</div>
+          <div class="c-seasonal__attr" style="background: rgba(255,255,255,0.4);"><i class="bi bi-people" style="color: var(--primary);"></i> Family Group</div>
+          <div class="c-seasonal__attr" style="background: rgba(255,255,255,0.4);"><i class="bi bi-globe" style="color: var(--primary);"></i> Southern Africa</div>
+          <div class="c-seasonal__attr" style="background: rgba(255,255,255,0.4);"><i class="bi bi-shield" style="color: var(--primary);"></i> Least Concern</div>
+        </div>
+      </div>
+    </div>
+    <table class="token-table" style="margin-top: 0.75rem;">
+      <tr><td><span class="token-swatch" style="background: #FFE5F0;"></span><span class="token-swatch" style="background: #B4E9D6; margin-left: 2px;"></span></td><td class="token-name" style="color: var(--red-500);">HARDCODED</td><td class="token-class">from-[#FFE5F0] to-[#B4E9D6] — hex gradient, won't respond to tokens</td></tr>
+      <tr><td></td><td class="token-name">dark fix</td><td class="token-class">Override with dark gradient (deep rose → deep green) via dark: or [data-theme]</td></tr>
+      <tr><td></td><td class="token-name">bg-white/40</td><td class="token-class">Attr cards → swap to rgba(255,255,255,0.08) on dark for subtle glass effect</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- ─── 29. WAVE WRAPPER ──────────────────────── -->
+<div class="ref-section">
+  <div class="ref-section__header">
+    <h2>WaveWrapper</h2>
+    <span class="badge-adapts">Adapts</span>
+  </div>
+  <div class="ref-section__meta">
+    sections/wave-wrapper/WaveWrapper.svelte — bgColorMap for bg, svgColorMap for pattern
+  </div>
+  <div class="ref-section__body">
+    <div class="grid-3">
+      <div class="c-wave" style="background: var(--primary);">
+        <div class="c-wave__pattern" style="color: var(--light);"></div>
+        <div style="position: relative; z-index: 1; color: var(--light); text-align: center; font-family: 'Rum Raisin', sans-serif;">
+          bg-primary<br><span style="font-family: 'Patrick Hand'; font-size: 0.85rem; opacity: 0.8;">with pattern overlay</span>
+        </div>
+      </div>
+      <div class="c-wave" style="background: var(--secondary);">
+        <div class="c-wave__pattern" style="color: var(--dark);"></div>
+        <div style="position: relative; z-index: 1; color: var(--dark); text-align: center; font-family: 'Rum Raisin', sans-serif;">
+          bg-secondary<br><span style="font-family: 'Patrick Hand'; font-size: 0.85rem; opacity: 0.8;">with pattern overlay</span>
+        </div>
+      </div>
+      <div class="c-wave" style="background: var(--tertiary);">
+        <div class="c-wave__pattern" style="color: var(--light);"></div>
+        <div style="position: relative; z-index: 1; color: var(--light); text-align: center; font-family: 'Rum Raisin', sans-serif;">
+          bg-tertiary<br><span style="font-family: 'Patrick Hand'; font-size: 0.85rem; opacity: 0.8;">with pattern overlay</span>
+        </div>
+      </div>
+    </div>
+    <table class="token-table" style="margin-top: 0.75rem;">
+      <tr><td></td><td class="token-name">bgColorMap</td><td class="token-class">Background from bgColorMap[color.key] — shifts via shared tokens</td></tr>
+      <tr><td></td><td class="token-name">svgColorMap</td><td class="token-class">Pattern colour from svgColorMap — must remain contrasting on bg</td></tr>
+      <tr><td></td><td class="token-name">SVG fetch</td><td class="token-class">Pattern SVGs fetched + fill colour injected via JS — uses computed color</td></tr>
+      <tr><td></td><td class="token-name">clip-path</td><td class="token-class">Wave shape via JS-generated clip-path — unaffected by dark mode</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- ─── 30. QUICK INFO ──────────────────────── -->
+<div class="ref-section">
+  <div class="ref-section__header">
+    <h2>QuickInfo</h2>
+    <span class="badge-adapts">Adapts</span>
+  </div>
+  <div class="ref-section__meta">
+    sections/quick-info/QuickInfo.svelte + QuickInfoIcon.svelte — nested colorMap usage
+  </div>
+  <div class="ref-section__body">
+    <div class="c-quickinfo" style="background: var(--primary); color: var(--light);">
+      <div class="font-heading" style="font-size: 1.1rem; margin-bottom: 0.75rem;">Plan Your Visit</div>
+      <div class="c-quickinfo__items">
+        <div class="c-quickinfo__item" style="background: var(--primary-100); color: var(--primary-700);">
+          <div class="c-quickinfo__icon" style="background: var(--primary-200); color: var(--primary-800);"><i class="bi bi-clock"></i></div>
+          <div><strong>Opening Hours</strong><br><span style="opacity: 0.8; font-size: 0.8rem;">10am – 5pm daily</span></div>
+        </div>
+        <div class="c-quickinfo__item" style="background: var(--primary-100); color: var(--primary-700);">
+          <div class="c-quickinfo__icon" style="background: var(--primary-200); color: var(--primary-800);"><i class="bi bi-geo-alt"></i></div>
+          <div><strong>Getting Here</strong><br><span style="opacity: 0.8; font-size: 0.8rem;">Just off the A38</span></div>
+        </div>
+        <div class="c-quickinfo__item" style="background: var(--primary-100); color: var(--primary-700);">
+          <div class="c-quickinfo__icon" style="background: var(--primary-200); color: var(--primary-800);"><i class="bi bi-p-circle"></i></div>
+          <div><strong>Parking</strong><br><span style="opacity: 0.8; font-size: 0.8rem;">Free on-site</span></div>
+        </div>
+      </div>
+    </div>
+    <table class="token-table" style="margin-top: 0.75rem;">
+      <tr><td><span class="token-swatch" style="background: var(--primary);"></span></td><td class="token-name">outer bg</td><td class="token-class">colorMap[background.key] — outer wrapper bg</td></tr>
+      <tr><td><span class="token-swatch" style="background: var(--primary-100);"></span></td><td class="token-name">item bg</td><td class="token-class">colorMap[background.key] on each QuickInfoIcon — nested colour</td></tr>
+      <tr><td><span class="token-swatch" style="background: var(--primary-200);"></span></td><td class="token-name">icon circle</td><td class="token-class">colorMap[iconBackground.key] — third level of nesting</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- ─── 31. INFORMATION PANEL ──────────────────────── -->
+<div class="ref-section">
+  <div class="ref-section__header">
+    <h2>InformationPanel</h2>
+    <span class="badge-adapts">Adapts</span>
+  </div>
+  <div class="ref-section__meta">
+    sections/information-panel/InformationPanel.svelte — panel bg from colorMap
+  </div>
+  <div class="ref-section__body">
+    <div class="grid-2">
+      <div class="stack">
+        <div style="border-radius: 8px; padding: 0.75rem; background: var(--bg-surface); border: 1px solid var(--border-subtle); transition: all 0.3s;">
+          <div class="font-heading" style="font-size: 0.95rem;">Accessible Facilities</div>
+          <p style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 0.25rem; transition: color 0.3s;">Wheelchair accessible paths throughout the park</p>
+        </div>
+        <div style="border-radius: 8px; padding: 0.75rem; background: var(--bg-surface); border: 1px solid var(--border-subtle); transition: all 0.3s;">
+          <div class="font-heading" style="font-size: 0.95rem;">Changing Places</div>
+          <p style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 0.25rem; transition: color 0.3s;">Full Changing Places facility near the main entrance</p>
+        </div>
+      </div>
+      <div style="border-radius: 12px; padding: 1rem; background: var(--tertiary); color: var(--light); transition: all 0.3s;">
+        <div class="font-heading" style="font-size: 1rem; margin-bottom: 0.75rem;">Need Help?</div>
+        <div style="display: flex; flex-direction: column; gap: 0.4rem; font-size: 0.85rem;">
+          <span><i class="bi bi-telephone" style="margin-right: 0.3rem;"></i> 01234 567890</span>
+          <span><i class="bi bi-envelope" style="margin-right: 0.3rem;"></i> access@attwellfarmpark.co.uk</span>
+          <span><i class="bi bi-download" style="margin-right: 0.3rem;"></i> Download access guide</span>
+        </div>
+      </div>
+    </div>
+    <table class="token-table" style="margin-top: 0.75rem;">
+      <tr><td><span class="token-swatch" style="background: var(--tertiary);"></span></td><td class="token-name">panel bg</td><td class="token-class">colorMap[panel.background_color.key] — shifts via shared token</td></tr>
+      <tr><td></td><td class="token-name">info cards</td><td class="token-class">InformationCard uses colorMap for bg — same system</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- ─── 32. TIMELINE ──────────────────────── -->
+<div class="ref-section">
+  <div class="ref-section__header">
+    <h2>Timeline</h2>
+    <span class="badge-adapts">Adapts</span>
+  </div>
+  <div class="ref-section__meta">
+    sections/timeline/Timeline.svelte — border-secondary throughline, bg-primary dots, bg-light + text-gray-400
+  </div>
+  <div class="ref-section__body">
+    <div class="c-timeline">
+      <div class="c-timeline__marker"><div class="c-timeline__dot"></div> April</div>
+      <div class="grid-2" style="gap: 0.75rem;">
+        <div class="c-activity" style="font-size: 0.8rem;">
+          <div class="c-activity__img" style="background: linear-gradient(135deg, var(--primary), var(--tertiary)); font-size: 1.2rem;"><i class="bi bi-calendar-event"></i></div>
+          <div class="c-activity__body">
+            <div class="c-activity__title" style="font-size: 0.85rem;">Easter Egg Hunt</div>
+            <div class="c-activity__time">10:00 – 16:00</div>
+          </div>
+        </div>
+        <div class="c-activity" style="font-size: 0.8rem;">
+          <div class="c-activity__img" style="background: linear-gradient(135deg, var(--secondary), oklch(71.46% 0.1369 86.68)); font-size: 1.2rem;"><i class="bi bi-calendar-event"></i></div>
+          <div class="c-activity__body">
+            <div class="c-activity__title" style="font-size: 0.85rem;">Lambing Weekend</div>
+            <div class="c-activity__time">All day</div>
+          </div>
+        </div>
+      </div>
+      <div class="c-timeline__marker"><div class="c-timeline__dot" style="width: 8px; height: 8px;"></div> May</div>
+    </div>
+    <table class="token-table" style="margin-top: 0.75rem;">
+      <tr><td><span class="token-swatch" style="background: var(--secondary);"></span></td><td class="token-name">border-secondary</td><td class="token-class">Throughline border — shifts via --secondary token</td></tr>
+      <tr><td><span class="token-swatch" style="background: var(--primary);"></span></td><td class="token-name">bg-primary</td><td class="token-class">Dot markers — shift via --primary token</td></tr>
+      <tr><td></td><td class="token-name">bg-light</td><td class="token-class">Label background — shifts via --light token</td></tr>
+      <tr><td></td><td class="token-name">text-gray-400</td><td class="token-class">Month labels hardcoded gray — needs dark override</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- ─── 33. EVENT OVERVIEW ──────────────────────── -->
+<div class="ref-section">
+  <div class="ref-section__header">
+    <h2>EventOverview</h2>
+    <span class="badge-adapts">Adapts</span>
+  </div>
+  <div class="ref-section__meta">
+    sections/event-overview/EventOverview.svelte — photo with bg-black opacity-40 overlay
+  </div>
+  <div class="ref-section__body">
+    <div class="c-event-overview">
+      <div class="c-event-overview__cover" style="background: linear-gradient(135deg, var(--primary), var(--tertiary));">
+        <div class="c-event-overview__overlay"></div>
+        <div style="position: relative; z-index: 1; text-align: center; color: white;">
+          <div class="font-heading" style="font-size: 1.3rem;">Easter at the Farm</div>
+          <p style="font-family: 'Patrick Hand', cursive; font-size: 1rem; opacity: 0.9;">Join us for egg hunts, lamb feeding and family fun!</p>
+        </div>
+      </div>
+      <div class="c-calendar" style="font-size: 0.8rem;">
+        <div class="c-calendar__body" style="padding: 0.75rem;">
+          <span class="c-badge" style="background: var(--red-100); color: var(--red-700); box-shadow: none; font-size: 0.65rem;">Special Event</span>
+          <div class="c-calendar__title" style="font-size: 0.95rem;">Easter Egg Hunt</div>
+          <div class="c-calendar__row" style="font-size: 0.75rem;">
+            <span class="c-calendar__label">Dates:</span>
+            <span class="c-badge" style="background: var(--tertiary-100); color: var(--tertiary-700); box-shadow: none; font-size: 0.6rem;">29th Mar – 13th Apr</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <table class="token-table" style="margin-top: 0.75rem;">
+      <tr><td></td><td class="token-name">bg-black opacity-40</td><td class="token-class">Hardcoded overlay — deepens to opacity-65 in dark via CSS override</td></tr>
+      <tr><td></td><td class="token-name">CalendarCard</td><td class="token-class">Embedded CalendarCard — inherits same token behaviour</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- ─── 34. CARD PROMO ──────────────────────── -->
+<div class="ref-section">
+  <div class="ref-section__header">
+    <h2>CardPromo</h2>
+    <span class="badge-adapts">Adapts</span>
+  </div>
+  <div class="ref-section__meta">
+    sections/card-promo/CardPromo.svelte — colour-mapped card backgrounds with cutout images
+  </div>
+  <div class="ref-section__body">
+    <div class="c-card-promo">
+      <div class="c-card-promo__card" style="background: var(--primary);">
+        <h4>Pygmy Goats</h4>
+        <div class="c-card-promo__label">Origin</div>
+        <p>West Africa</p>
+        <div class="c-card-promo__label" style="margin-top: 0.4rem;">Status</div>
+        <p>Domesticated</p>
+      </div>
+      <div class="c-card-promo__card" style="background: var(--tertiary);">
+        <h4>Meerkats</h4>
+        <div class="c-card-promo__label">Origin</div>
+        <p>Southern Africa</p>
+        <div class="c-card-promo__label" style="margin-top: 0.4rem;">Status</div>
+        <p>Least Concern</p>
+      </div>
+      <div class="c-card-promo__card" style="background: var(--secondary); color: var(--dark);">
+        <h4>Alpacas</h4>
+        <div class="c-card-promo__label">Origin</div>
+        <p>South America</p>
+        <div class="c-card-promo__label" style="margin-top: 0.4rem;">Status</div>
+        <p>Domesticated</p>
+      </div>
+    </div>
+    <table class="token-table" style="margin-top: 0.75rem;">
+      <tr><td></td><td class="token-name">colorMap[slide.color.key]</td><td class="token-class">Each card bg from colorMap — shifts via shared tokens</td></tr>
+      <tr><td></td><td class="token-name">text</td><td class="token-class">color: transparent on headings (inherits from card) — works if parent color is right</td></tr>
+      <tr><td></td><td class="token-name">cutout images</td><td class="token-class">blur-xs brightness-75 contrast-50 grayscale on shadow — unaffected by dark mode</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- ─── 35. CHECKLIST ──────────────────────── -->
+<div class="ref-section">
+  <div class="ref-section__header">
+    <h2>Checklist</h2>
+    <span class="badge-adapts">Adapts</span>
+  </div>
+  <div class="ref-section__meta">
+    sections/checklist/Checklist.svelte — bg-primary or bg-secondary stickers + images
+  </div>
+  <div class="ref-section__body">
+    <div style="display: flex; flex-direction: column; align-items: center; gap: 0.75rem;">
+      <div style="display: flex; gap: 0.5rem;">
+        <div style="width: 50px; height: 50px; border-radius: 50%; background: var(--primary); color: var(--light); display: flex; flex-direction: column; align-items: center; justify-content: center; font-family: 'Rum Raisin', sans-serif; font-size: 0.4rem; transform: rotate(12deg); transition: all 0.3s;">
+          <span>FROM</span><span style="font-size: 0.7rem;">£12</span><span>.95</span>
+        </div>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 0.4rem; align-items: center;">
+        <div class="c-trapezoid">
+          <div class="c-trapezoid__tail"><svg viewBox="0 0 20 40" preserveAspectRatio="none"><polygon points="20,0 20,40 0,40" style="fill: var(--secondary-100);"/></svg></div>
+          <div class="c-trapezoid__body" style="background: var(--secondary-100); color: var(--secondary-700); font-size: 0.9rem; transition: all 0.3s;"><i class="bi bi-check-circle-fill" style="color: var(--primary); margin-right: 0.25rem;"></i> Free parking on-site</div>
+          <div class="c-trapezoid__tail"><svg viewBox="0 0 20 40" preserveAspectRatio="none"><polygon points="0,0 20,0 0,40" style="fill: var(--secondary-100);"/></svg></div>
+        </div>
+        <div class="c-trapezoid">
+          <div class="c-trapezoid__tail"><svg viewBox="0 0 20 40" preserveAspectRatio="none"><polygon points="20,0 20,40 0,40" style="fill: var(--secondary-100);"/></svg></div>
+          <div class="c-trapezoid__body" style="background: var(--secondary-100); color: var(--secondary-700); font-size: 0.9rem; transition: all 0.3s;"><i class="bi bi-check-circle-fill" style="color: var(--primary); margin-right: 0.25rem;"></i> Over 20 attractions</div>
+          <div class="c-trapezoid__tail"><svg viewBox="0 0 20 40" preserveAspectRatio="none"><polygon points="0,0 20,0 0,40" style="fill: var(--secondary-100);"/></svg></div>
+        </div>
+      </div>
+    </div>
+    <table class="token-table" style="margin-top: 0.75rem;">
+      <tr><td><span class="token-swatch" style="background: var(--primary);"></span></td><td class="token-name">imageBgColor</td><td class="token-class">Sticker + image bg — conditional bg-primary or bg-secondary</td></tr>
+      <tr><td><span class="token-swatch" style="background: var(--secondary-100);"></span></td><td class="token-name">secondary-light</td><td class="token-class">Trapezoid items use Trapezoid color="secondary-light"</td></tr>
+      <tr><td><span class="token-swatch" style="background: var(--primary);"></span></td><td class="token-name">text-primary</td><td class="token-class">Checkmark icons — shifts via token</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- ─── 36. FOOD & DRINK (WhatsOnMatrix) ──────────────────────── -->
+<div class="ref-section">
+  <div class="ref-section__header">
+    <h2>FoodDrink / WhatsOnMatrix</h2>
+    <span class="badge-adapts">Adapts</span>
+  </div>
+  <div class="ref-section__meta">
+    sections/food-drink/FoodDrink.svelte + sections/whats-on-matrix/WhatsOnMatrix.svelte
+  </div>
+  <div class="ref-section__body">
+    <div class="grid-3" style="gap: 0.75rem;">
+      <div style="border-radius: 10px; padding: 0.85rem; background: var(--tertiary-100); color: var(--tertiary-700); transition: all 0.3s;">
+        <div class="font-heading" style="font-size: 0.95rem;"><i class="bi bi-cup-hot" style="margin-right: 0.25rem;"></i> The Barn Café</div>
+        <p style="font-size: 0.8rem; margin-top: 0.25rem; opacity: 0.8;">Hot meals, sandwiches and hot drinks</p>
+        <span class="c-badge" style="background: var(--primary); color: white; box-shadow: none; font-size: 0.6rem; margin-top: 0.5rem;">Open Now</span>
+      </div>
+      <div style="border-radius: 10px; padding: 0.85rem; background: var(--tertiary-100); color: var(--tertiary-700); transition: all 0.3s;">
+        <div class="font-heading" style="font-size: 0.95rem;"><i class="bi bi-ice-cream" style="margin-right: 0.25rem;"></i> Ice Cream Parlour</div>
+        <p style="font-size: 0.8rem; margin-top: 0.25rem; opacity: 0.8;">Farm-fresh ice cream and milkshakes</p>
+        <span class="c-badge" style="background: var(--secondary); color: var(--dark); box-shadow: none; font-size: 0.6rem; margin-top: 0.5rem;">Seasonal</span>
+      </div>
+      <div style="border-radius: 10px; padding: 0.85rem; background: var(--tertiary-100); color: var(--tertiary-700); transition: all 0.3s;">
+        <div class="font-heading" style="font-size: 0.95rem;"><i class="bi bi-shop" style="margin-right: 0.25rem;"></i> Farm Shop</div>
+        <p style="font-size: 0.8rem; margin-top: 0.25rem; opacity: 0.8;">Local produce and gifts</p>
+        <span class="c-badge" style="background: var(--primary); color: white; box-shadow: none; font-size: 0.6rem; margin-top: 0.5rem;">Open Now</span>
+      </div>
+    </div>
+    <table class="token-table" style="margin-top: 0.75rem;">
+      <tr><td><span class="token-swatch" style="background: var(--tertiary-100);"></span></td><td class="token-name">bg-tertiary-100</td><td class="token-class">Hardcoded in FoodDrink — not via colorMap. Needs --tertiary-100 token.</td></tr>
+      <tr><td></td><td class="token-name">text-tertiary-700</td><td class="token-class">Hardcoded text colour — needs --tertiary-700 token</td></tr>
+      <tr><td></td><td class="token-name">bg-white (dialog)</td><td class="token-class">Menu dialog uses hardcoded bg-white — needs --bg-surface</td></tr>
+      <tr><td></td><td class="token-name">WhatsOnMatrix</td><td class="token-class">Uses bg-light + text-gray-400 — same hardcoded gray issues</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- ─── 37. CONTENT SECTION (page bg) ──────────────────────── -->
+<div class="ref-section">
+  <div class="ref-section__header">
+    <h2>Page Surfaces</h2>
+    <span class="badge-adapts">Adapts</span>
+  </div>
+  <div class="ref-section__meta">
+    app.css — page background, body text, surface elevation tiers
+  </div>
+  <div class="ref-section__body">
+    <div class="grid-4">
+      <div style="padding: 1rem; border-radius: 10px; background: var(--bg); border: 1px solid var(--border-subtle); text-align: center; transition: all 0.3s;">
+        <div style="font-size: 0.7rem; font-weight: 600; margin-bottom: 0.25rem;">Base</div>
+        <div style="font-size: 0.6rem; color: var(--text-secondary); font-family: monospace; transition: color 0.3s;">--bg</div>
+      </div>
+      <div style="padding: 1rem; border-radius: 10px; background: var(--bg-surface); border: 1px solid var(--border-subtle); text-align: center; transition: all 0.3s;">
+        <div style="font-size: 0.7rem; font-weight: 600; margin-bottom: 0.25rem;">Surface</div>
+        <div style="font-size: 0.6rem; color: var(--text-secondary); font-family: monospace; transition: color 0.3s;">--bg-surface</div>
+      </div>
+      <div style="padding: 1rem; border-radius: 10px; background: var(--bg-surface-elevated); border: 1px solid var(--border-subtle); text-align: center; transition: all 0.3s;">
+        <div style="font-size: 0.7rem; font-weight: 600; margin-bottom: 0.25rem;">Elevated</div>
+        <div style="font-size: 0.6rem; color: var(--text-secondary); font-family: monospace; transition: color 0.3s;">--bg-surface-elevated</div>
+      </div>
+      <div style="padding: 1rem; border-radius: 10px; background: var(--bg-surface-highest); border: 1px solid var(--border-subtle); text-align: center; transition: all 0.3s;">
+        <div style="font-size: 0.7rem; font-weight: 600; margin-bottom: 0.25rem;">Highest</div>
+        <div style="font-size: 0.6rem; color: var(--text-secondary); font-family: monospace; transition: color 0.3s;">--bg-surface-highest</div>
+      </div>
+    </div>
+    <table class="token-table" style="margin-top: 0.75rem;">
+      <tr><td><span class="token-swatch" style="background: var(--text-primary);"></span></td><td class="token-name">--text-primary</td><td class="token-class">Main body text — dark ↔ off-white</td></tr>
+      <tr><td><span class="token-swatch" style="background: var(--text-secondary);"></span></td><td class="token-name">--text-secondary</td><td class="token-class">Muted text — mid-dark ↔ mid-light</td></tr>
+      <tr><td><span class="token-swatch" style="background: var(--border-subtle);"></span></td><td class="token-name">--border-subtle</td><td class="token-class">Card/section borders — adapts to dark</td></tr>
+    </table>
+  </div>
+</div>
+
+<div style="height: 3rem;"></div>
+
+<!-- ═══════════════════════════════════════════════
+     SCRIPT
+     ═══════════════════════════════════════════════ -->
 <script>
 function toggleTheme() {
   const html = document.documentElement;
   const btn = document.getElementById('toggle-btn');
-  const label = document.getElementById('mode-label');
-
   if (html.getAttribute('data-theme') === 'dark') {
     html.removeAttribute('data-theme');
-    btn.textContent = 'Switch to Dark Mode';
-    label.textContent = 'Light Mode';
+    btn.textContent = 'Switch to Dark';
   } else {
     html.setAttribute('data-theme', 'dark');
-    btn.textContent = 'Switch to Light Mode';
-    label.textContent = 'Dark Mode';
+    btn.textContent = 'Switch to Light';
   }
+}
+function scrollToSection(id) {
+  document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
 }
 </script>
 </body>
